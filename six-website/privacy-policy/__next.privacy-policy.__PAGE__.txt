@@ -1,0 +1,107 @@
+1:"$Sreact.fragment"
+2:I[9441,["/_next/static/chunks/0oz9.ct-7ts.l.js","/_next/static/chunks/0d3shmwh5_nmn.js"],"default"]
+6:I[97367,["/_next/static/chunks/0oz9.ct-7ts.l.js","/_next/static/chunks/0d3shmwh5_nmn.js"],"OutletBoundary"]
+7:"$Sreact.suspense"
+3:T2ab8,<h1>Privacy Policy</h1>
+<p><strong>Effective date: May 22, 2026</strong></p>
+
+<p>Welcome to Velvet Trails (sixstarsdestinations.com). We are dedicated to providing you with inspiring editorial content and a blog focused on luxury hidden gems for vacations, offering insights into billionaires' beauty and comfort at surprisingly affordable prices. Your privacy is of paramount importance to us. This Privacy Policy outlines how Velvet Trails collects, uses, maintains, and discloses information collected from users (each, a "User") of the sixstarsdestinations.com website ("Site"). This policy applies to the Site and all products and services offered by Velvet Trails.</p>
+
+<h2>Information We Collect</h2>
+<p>Velvet Trails collects various types of information to operate our Site, provide our content, and display relevant advertising. We collect both automatically generated information and, in some cases, information you voluntarily provide.</p>
+
+<ul>
+    <li>
+        <p><strong>Automatically Collected Information:</strong> When you visit sixstarsdestinations.com, our servers and third-party services automatically record certain information that your browser sends. This data may include:</p>
+        <ul>
+            <li>Your Internet Protocol (IP) address.</li>
+            <li>Browser type and version.</li>
+            <li>Device type and operating system.</li>
+            <li>Pages you visit on Velvet Trails.</li>
+            <li>The time and date of your visit.</li>
+            <li>The time spent on those pages.</li>
+            <li>Referring website addresses.</li>
+            <li>Demographic data and interests (inferred through analytics and advertising services).</li>
+            <li>Information about your interactions with advertisements displayed on the Site.</li>
+        </ul>
+        <p>This information is primarily non-personally identifiable and is used for analytical purposes, to improve the user experience, and to deliver targeted advertising.</p>
+    </li>
+    <li>
+        <p><strong>Information You Voluntarily Provide:</strong> While Velvet Trails does not sell products directly, you may choose to provide us with personal information in other ways, such as:</p>
+        <ul>
+            <li>When you submit comments on our blog posts.</li>
+            <li>When you subscribe to a newsletter (if offered).</li>
+            <li>When you contact us directly via email or a contact form.</li>
+        </ul>
+        <p>This information may include your name, email address, and any other details you choose to share. We only collect this information if you voluntarily submit it to us.</p>
+    </li>
+</ul>
+
+<h2>How We Use Information</h2>
+<p>Velvet Trails uses the collected information for the following purposes:</p>
+<ul>
+    <li><strong>To Operate and Maintain Velvet Trails:</strong> To ensure the proper functioning and security of sixstarsdestinations.com.</li>
+    <li><strong>To Improve User Experience:</strong> We use aggregated information to understand how our Users as a group use the services and resources provided on our Site. This helps us to personalize content and improve the overall design and functionality of Velvet Trails.</li>
+    <li><strong>To Display Relevant Advertising:</strong> Information collected through cookies and third-party services (like Google AdSense) allows us to display advertisements that are more relevant to your interests, enhancing your browsing experience and supporting the free content we provide.</li>
+    <li><strong>To Understand Audience Demographics and Interests:</strong> We analyze data to gain insights into our audience's demographics and interests, which helps us tailor our editorial content on luxury hidden gems and travel to better suit our readers.</li>
+    <li><strong>To Respond to Inquiries:</strong> If you contact us, we use the information you provide to respond to your questions, comments, or requests.</li>
+    <li><strong>To Comply with Legal Obligations:</strong> We may use your information as necessary to comply with applicable laws, regulations, legal processes, or governmental requests.</li>
+</ul>
+<p>Please note that Velvet Trails does not sell products directly, and therefore, your information is not used for direct product sales transactions on our Site.</p>
+
+<h2>Cookies and Advertising</h2>
+<p>Velvet Trails (sixstarsdestinations.com) uses "cookies" to enhance your experience. A cookie is a small text file placed on your device by a web server. Cookies are widely used to make websites work more efficiently, as well as to provide information to the owners of the site.</p>
+<ul>
+    <li>
+        <p><strong>How We Use Cookies:</strong> We use cookies for two primary purposes:</p>
+        <ul>
+            <li><strong>Analytics:</strong> To track and analyze user activity on Velvet Trails, helping us understand how visitors interact with our content and improve our Site.</li>
+            <li><strong>Advertising:</strong> To display personalized advertisements through Google AdSense and other advertising partners. These cookies help to make advertising more relevant to you by collecting information about your browsing habits and interests.</li>
+        </ul>
+    </li>
+    <li>
+        <p><strong>Google AdSense / Google Publisher Tag:</strong> Velvet Trails utilizes Google AdSense to serve advertisements. Google uses cookies, including DART cookies, to serve ads based on your visit to sixstarsdestinations.com and other sites on the Internet. The Google Publisher Tag Network ID for Velvet Trails is `/21679776076/sixstarsdestinations.com`. This allows Google and its partners to serve ads to our Users based on their visit to our Site and/or other sites on the Internet.</p>
+    </li>
+    <li>
+        <p><strong>Managing Cookies:</strong> You have the option to accept or decline cookies. Most web browsers automatically accept cookies, but you can usually modify your browser setting to decline cookies if you prefer. Please note that disabling cookies may affect the functionality of Velvet Trails and other websites you visit. You can also opt out of personalized advertising by visiting <a href="https://www.google.com/settings/ads" target="_blank">Google Ad Settings</a> or by visiting the <a href="http://www.aboutads.info/choices/" target="_blank">Digital Advertising Alliance's opt-out page</a> or the <a href="http://www.networkadvertising.org/choices/" target="_blank">Network Advertising Initiative's opt-out page</a>.</p>
+    </li>
+</ul>
+
+<h2>Third-Party Services (Google)</h2>
+<p>Velvet Trails relies on third-party services, primarily Google, to provide analytics and advertising services. These third parties may collect information directly from you or from your device when you visit sixstarsdestinations.com.</p>
+<ul>
+    <li>
+        <p><strong>Google Analytics:</strong> We use Google Analytics to collect information about how visitors use our Site. Google Analytics uses cookies to collect information such as your IP address, browser type, and pages visited. This information is used to compile reports and help us improve the Site. Google's ability to use and share information collected by Google Analytics about your visits to Velvet Trails is restricted by the Google Analytics Terms of Service and the Google Privacy Policy.</p>
+    </li>
+    <li>
+        <p><strong>Google AdSense:</strong> As mentioned, Google AdSense is used to display advertisements on Velvet Trails. Google, as a third-party vendor, uses cookies to serve ads on our Site. Google's use of the DART cookie enables it to serve ads to our Users based on their visit to sixstarsdestinations.com and other sites on the Internet. You may opt out of the use of the DART cookie by visiting the Google Ad and Content Network Privacy Policy.</p>
+    </li>
+</ul>
+<p>Please be aware that Velvet Trails does not control the privacy practices of these third-party services. We encourage you to review the privacy policies of Google and any other third-party services linked from our Site to understand their data collection and usage practices.</p>
+
+<h2>Your Rights</h2>
+<p>Depending on your location and applicable laws, you may have certain rights regarding your personal data. These rights may include:</p>
+<ul>
+    <li><strong>Right to Access:</strong> You have the right to request copies of your personal data that Velvet Trails holds.</li>
+    <li><strong>Right to Rectification:</strong> You have the right to request that Velvet Trails correct any information you believe is inaccurate or complete information you believe is incomplete.</li>
+    <li><strong>Right to Erasure (Right to be Forgotten):</strong> You have the right to request that Velvet Trails erase your personal data, under certain conditions.</li>
+    <li><strong>Right to Restrict Processing:</strong> You have the right to request that Velvet Trails restrict the processing of your personal data, under certain conditions.</li>
+    <li><strong>Right to Object to Processing:</strong> You have the right to object to Velvet Trails' processing of your personal data, under certain conditions.</li>
+    <li><strong>Right to Data Portability:</strong> You have the right to request that Velvet Trails transfer the data that we have collected to another organization, or directly to you, under certain conditions.</li>
+    <li><strong>Right to Withdraw Consent:</strong> Where we rely on your consent to process your personal data, you have the right to withdraw that consent at any time.</li>
+</ul>
+<p>To exercise any of these rights, please contact us using the contact information provided below. We will respond to your request in accordance with applicable data protection laws.</p>
+
+<h2>Children's Privacy</h2>
+<p>Velvet Trails (sixstarsdestinations.com) is not directed at children under the age of 13. We do not knowingly collect personally identifiable information from children under 13. If you are a parent or guardian and believe that your child has provided us with personal information, please contact us, and we will take steps to remove that information from our systems.</p>
+
+<h2>Changes to This Privacy Policy</h2>
+<p>Velvet Trails has the discretion to update this Privacy Policy at any time. When we do, we will revise the "effective date" at the top of this page. We encourage Users to frequently check this page for any changes to stay informed about how we are helping to protect the personal information we collect. You acknowledge and agree that it is your responsibility to review this Privacy Policy periodically and become aware of modifications.</p>
+
+<h2>Contact Us</h2>
+<p>If you have any questions about this Privacy Policy, the practices of Velvet Trails, or your dealings with sixstarsdestinations.com, please contact us at:</p>
+<p>Email: privacy@sixstarsdestinations.com</p>
+<p>Website: <a href="https://www.sixstarsdestinations.com" target="_blank">https://www.sixstarsdestinations.com</a></p>0:{"rsc":["$","$1","c",{"children":[["$","div",null,{"className":"max-w-4xl mx-auto px-4 py-12","children":[["$","div",null,{"className":"mb-8","children":["$","$L2",null,{"id":"ad-header-privacy","type":"300x250","className":"mx-auto"}]}],["$","div",null,{"className":"bg-white p-8 rounded-xl border border-gray-100 shadow-sm","children":["$","div",null,{"className":"prose prose-lg max-w-none prose-slate","dangerouslySetInnerHTML":{"__html":"$3"}}]}],"$L4"]}],null,"$L5"]}],"isPartial":false,"staleTime":300,"varyParams":null,"buildId":"7KOJdhGRcxW7f89eEXVmz"}
+4:["$","div",null,{"className":"mt-8","children":["$","$L2",null,{"id":"ad-bottom-privacy","type":"320x50","className":"mx-auto"}]}]
+5:["$","$L6",null,{"children":["$","$7",null,{"name":"Next.MetadataOutlet","children":"$@8"}]}]
+8:null
