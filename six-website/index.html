@@ -3,182 +3,198 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Six Stars Destinations — Luxury Travel Without the Price Tag</title>
+<title>Six Stars Destinations — Independent Travel Journal</title>
 <meta name="description" content="Discover hidden luxury travel gems worldwide. Expert guides on five-star stays, boutique hotels, and exclusive experiences at attainable prices.">
 <meta name="robots" content="index, follow">
 <link rel="canonical" href="https://sixstarsdestinations.com/">
 <link rel="icon" href="/favicon.ico?favicon.0x3dzn~oxb6tn.ico" sizes="256x256" type="image/x-icon">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500;1,600&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Work+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&family=Crimson+Text:ital,wght@0,400;0,600;0,700;1,400;1,600&display=swap" rel="stylesheet">
 <link rel="preload" href="https://securepubads.g.doubleclick.net/tag/js/gpt.js" as="script" crossorigin="">
 <script>(self.__next_s = self.__next_s || []).push(["https://securepubads.g.doubleclick.net/tag/js/gpt.js", { "async": true, "crossOrigin": "anonymous" }])</script>
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 
 :root{
-  --bg:#080808;
-  --bg-card:#131313;
-  --bg-card-hover:#1A1A1A;
-  --bg-elevated:#0F0F0F;
-  --gold:#C8A45C;
-  --gold-light:#D4B872;
-  --gold-dark:#A8863F;
-  --gold-pale:rgba(200,164,92,0.15);
-  --gold-subtle:rgba(200,164,92,0.08);
-  --text:#E8E0D0;
-  --text-bright:#F5EFE5;
-  --text-muted:#8A8278;
-  --text-dim:#5A5450;
-  --border:rgba(200,164,92,0.15);
-  --border-light:rgba(200,164,92,0.08);
-  --radius:0;
-  --transition:0.35s cubic-bezier(0.25,0.46,0.45,0.94);
+  --stone:#FDF9F3;
+  --stone-warm:#F5EFE6;
+  --sand:#EDE4D6;
+  --sand-dark:#D4C8B5;
+  --paper:#FFFEFB;
+  --ink:#2D2418;
+  --ink-light:#5C5244;
+  --ink-muted:#8A7D6E;
+  --rust:#C67A4A;
+  --rust-bright:#D48952;
+  --olive:#6B8A6B;
+  --olive-dark:#4A6B4A;
+  --sky:#8AA4B0;
+  --sky-light:#A8C0CA;
+  --clay:#B8684C;
+  --border:#E8E0D5;
+  --border-light:#F0EAE0;
+  --radius:3px;
+  --radius-lg:6px;
+  --shadow-sm:0 1px 3px rgba(45,36,24,0.04);
+  --shadow:0 4px 16px rgba(45,36,24,0.06);
+  --shadow-lg:0 12px 32px rgba(45,36,24,0.08);
+  --transition:0.3s ease;
 }
 
-html{scroll-behavior:smooth;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;background:var(--bg)}
-body{font-family:"Montserrat",system-ui,-apple-system,sans-serif;background:var(--bg);color:var(--text);line-height:1.7;min-height:100vh;font-weight:300;letter-spacing:0.01em}
+html{scroll-behavior:smooth;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
+body{font-family:"Work Sans",system-ui,-apple-system,sans-serif;background:var(--stone);color:var(--ink);line-height:1.7;min-height:100vh;font-weight:400;font-size:16px}
 img{max-width:100%;height:auto;display:block}
-a{color:var(--gold);text-decoration:none;transition:color var(--transition)}
-a:hover{color:var(--gold-light)}
+a{color:var(--ink);text-decoration:none;transition:color var(--transition)}
+a:hover{color:var(--rust)}
 
 /* Typography */
-h1,h2,h3,h4{font-family:"Playfair Display",Georgia,serif;font-weight:700;color:var(--text-bright)}
-.section-eyebrow{font-family:"Montserrat",sans-serif;font-size:0.65rem;font-weight:500;letter-spacing:4px;text-transform:uppercase;color:var(--gold);margin-bottom:12px}
-.section-title{font-size:clamp(1.8rem,3vw,2.6rem);font-weight:700;letter-spacing:-0.5px;margin-bottom:10px;color:var(--text-bright)}
-.section-subtitle{font-size:1rem;color:var(--text-muted);font-weight:300;line-height:1.6;font-family:"Cormorant Garamond",Georgia,serif;font-style:italic}
+h1,h2,h3{font-family:"DM Serif Display",Georgia,serif;font-weight:400;color:var(--ink);letter-spacing:-0.01em}
+.section-tag{font-family:"Work Sans",sans-serif;font-size:0.68rem;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:var(--rust);margin-bottom:8px}
+.section-title{font-size:clamp(1.8rem,3.2vw,2.8rem);margin-bottom:6px;line-height:1.15}
+.section-desc{font-family:"Crimson Text",Georgia,serif;font-size:1.1rem;color:var(--ink-muted);font-style:italic;line-height:1.5}
 
 /* Layout */
-.container{max-width:1240px;margin:0 auto;padding:0 32px}
+.wrap{max-width:1120px;margin:0 auto;padding:0 28px}
+.wrap-wide{max-width:1280px;margin:0 auto;padding:0 32px}
 
-/* Gold divider */
-.gold-line{width:60px;height:1px;background:var(--gold);margin:0 auto;opacity:0.6}
-.gold-line-left{width:60px;height:1px;background:var(--gold);margin:0 0 20px 0;opacity:0.6}
+/* Decorative */
+.ornament{display:flex;align-items:center;gap:10px;color:var(--sand-dark);font-size:0.5rem;letter-spacing:6px}
+.ornament::before,.ornament::after{content:"";flex:1;height:1px;background:var(--border)}
 
 /* Header */
-.site-header{background:rgba(8,8,8,0.95);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-bottom:1px solid var(--border);position:sticky;top:0;z-index:100}
-.header-inner{display:flex;align-items:center;justify-content:space-between;height:72px}
-.logo{font-family:"Playfair Display",Georgia,serif;font-size:1.45rem;font-weight:700;color:var(--text-bright);letter-spacing:1px;display:flex;align-items:center;gap:8px}
-.logo-icon{color:var(--gold);font-size:1.2rem}
-.header-nav{display:flex;gap:32px;align-items:center}
-.header-nav a{color:var(--text-muted);font-size:0.78rem;font-weight:400;letter-spacing:2px;text-transform:uppercase;padding:6px 0;border-bottom:1px solid transparent;transition:all var(--transition)}
-.header-nav a:hover{color:var(--gold);border-bottom-color:var(--gold)}
+.site-header{background:rgba(253,249,243,0.94);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);border-bottom:1px solid var(--border);position:sticky;top:0;z-index:100}
+.header-inner{display:flex;align-items:center;justify-content:space-between;height:64px}
+.logo{font-family:"DM Serif Display",Georgia,serif;font-size:1.3rem;color:var(--ink);letter-spacing:-0.2px;display:flex;align-items:center;gap:6px}
+.logo-mark{display:inline-block;width:8px;height:8px;background:var(--rust);border-radius:50%;position:relative}
+.logo-mark::after{content:"";position:absolute;inset:-4px;border:1px solid var(--rust);border-radius:50%;opacity:0.3}
+.header-nav{display:flex;gap:28px;align-items:center}
+.header-nav a{color:var(--ink-muted);font-size:0.8rem;font-weight:500;letter-spacing:0.5px;transition:color var(--transition);position:relative}
+.header-nav a:hover{color:var(--rust)}
+.header-nav a::after{content:"";position:absolute;bottom:-4px;left:0;width:0;height:2px;background:var(--rust);transition:width var(--transition)}
+.header-nav a:hover::after{width:100%}
 
 /* Hero */
-.hero{position:relative;min-height:85vh;display:flex;align-items:center;justify-content:center;text-align:center;overflow:hidden;background:#0A0A0A}
-.hero-bg{position:absolute;inset:0;background:radial-gradient(ellipse at center,rgba(200,164,92,0.06) 0%,transparent 60%),radial-gradient(ellipse at 70% 20%,rgba(200,164,92,0.04) 0%,transparent 50%)}
-.hero-pattern{position:absolute;inset:0;opacity:0.03;background-image:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(200,164,92,0.3) 2px,rgba(200,164,92,0.3) 3px),repeating-linear-gradient(90deg,transparent,transparent 2px,rgba(200,164,92,0.3) 2px,rgba(200,164,92,0.3) 3px)}
-.hero-content{position:relative;z-index:2;max-width:800px;padding:40px 20px}
-.hero-badge{display:inline-block;border:1px solid var(--gold);color:var(--gold);padding:8px 28px;font-size:0.65rem;font-weight:500;letter-spacing:5px;text-transform:uppercase;margin-bottom:36px}
-.hero h1{font-size:clamp(3rem,7vw,5.5rem);font-weight:900;letter-spacing:-1px;line-height:1.05;margin-bottom:20px;color:var(--text-bright)}
-.hero h1 .gold{color:var(--gold)}
-.hero .hero-tagline{font-family:"Cormorant Garamond",Georgia,serif;font-size:1.3rem;color:var(--text-muted);font-style:italic;font-weight:300;letter-spacing:1px;max-width:520px;margin:0 auto 36px;line-height:1.5}
-.hero-scroll{position:absolute;bottom:40px;left:50%;transform:translateX(-50%);z-index:2}
-.hero-scroll span{display:block;width:1px;height:50px;background:linear-gradient(to bottom,var(--gold),transparent);margin:0 auto 8px}
-.hero-scroll small{font-size:0.6rem;letter-spacing:3px;text-transform:uppercase;color:var(--text-dim)}
+.hero{position:relative;min-height:78vh;display:flex;align-items:flex-end;padding:0;overflow:hidden;background:linear-gradient(135deg,#EDE4D6 0%,#DDD0B8 30%,#C8B896 60%,#B8A880 100%)}
+.hero-img{position:absolute;inset:0;opacity:0.55;mix-blend-mode:multiply}
+.hero-img img{width:100%;height:100%;object-fit:cover}
+.hero-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(45,36,24,0.7) 0%,rgba(45,36,24,0.2) 40%,rgba(45,36,24,0.05) 100%)}
+.hero-content{position:relative;z-index:3;padding:60px 32px 50px;max-width:1120px;margin:0 auto;width:100%}
+.hero-eyebrow{font-family:"Work Sans",sans-serif;font-size:0.65rem;font-weight:600;letter-spacing:6px;text-transform:uppercase;color:rgba(255,255,255,0.75);margin-bottom:16px}
+.hero h1{font-size:clamp(2.4rem,6.5vw,5rem);color:#FDF9F3;line-height:1.05;margin-bottom:12px;text-shadow:0 2px 12px rgba(0,0,0,0.3)}
+.hero h1 .accent{color:var(--rust-bright);font-style:italic}
+.hero .hero-sub{font-size:1.15rem;color:rgba(255,255,255,0.7);max-width:480px;line-height:1.5;font-weight:300}
 
 /* Ad slots */
-.ad-slot{display:flex;justify-content:center;align-items:center;min-height:90px;padding:24px 0;background:var(--bg)}
+.ad-slot{display:flex;justify-content:center;align-items:center;min-height:90px;padding:28px 0}
 
 /* Section */
-.page-section{padding:90px 0}
-.page-section-alt{background:var(--bg-elevated);padding:90px 0}
-.section-header{text-align:center;margin-bottom:56px}
-.section-header .gold-line{margin-top:16px}
+.section{padding:70px 0}
+.section-alt{background:var(--stone-warm);padding:70px 0}
+.section-head{margin-bottom:40px;max-width:600px}
+.section-head.center{margin-left:auto;margin-right:auto;text-align:center}
 
-/* Featured Article */
-.featured-wrap{padding:0 0 90px}
-.featured-card{display:grid;grid-template-columns:1.1fr 1fr;min-height:520px;background:var(--bg-card);border:1px solid var(--border);position:relative;overflow:hidden;transition:all var(--transition)}
-.featured-card:hover{border-color:rgba(200,164,92,0.35);background:var(--bg-card-hover)}
-.featured-card::after{content:"";position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--gold),transparent);opacity:0.4}
-.featured-card-img{position:relative;overflow:hidden;min-height:520px}
-.featured-card-img img{width:100%;height:100%;object-fit:cover;transition:transform 0.7s ease}
-.featured-card:hover .featured-card-img img{transform:scale(1.03)}
-.featured-card-body{display:flex;flex-direction:column;justify-content:center;padding:56px 48px;position:relative}
-.featured-card-body .tag{display:inline-block;color:var(--gold);font-size:0.6rem;font-weight:500;letter-spacing:4px;text-transform:uppercase;margin-bottom:20px;padding-bottom:16px;border-bottom:1px solid var(--border)}
-.featured-card-body h2{font-size:1.9rem;font-weight:700;line-height:1.2;margin-bottom:16px;letter-spacing:-0.3px}
-.featured-card-body p{color:var(--text-muted);font-size:0.92rem;line-height:1.7;margin-bottom:28px;font-weight:300}
-.featured-card-body .read-link{display:inline-flex;align-items:center;gap:10px;color:var(--gold);font-size:0.7rem;font-weight:500;letter-spacing:3px;text-transform:uppercase;align-self:flex-start}
-.featured-card-body .read-link .arrow{display:inline-block;transition:transform var(--transition);font-size:1.1rem}
-.featured-card:hover .read-link .arrow{transform:translateX(6px)}
+/* Horizontal divider */
+.divider{border:none;height:1px;background:var(--border);margin:0}
+.divider-ornament{display:flex;align-items:center;justify-content:center;gap:12px;padding:24px 0;color:var(--sand-dark);font-size:0.4rem}
+.divider-ornament::before,.divider-ornament::after{content:"";width:80px;height:1px;background:var(--sand-dark);opacity:0.4}
 
-/* Cards Grid */
-.cards-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:1px;background:var(--border)}
-.cards-grid-3{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:1px;background:var(--border)}
-.cards-grid-2{display:grid;grid-template-columns:repeat(auto-fill,minmax(480px,1fr));gap:1px;background:var(--border)}
+/* Feature Card (large horizontal) */
+.feature-card{display:grid;grid-template-columns:1.2fr 1fr;background:var(--paper);border-radius:var(--radius-lg);overflow:hidden;border:1px solid var(--border);box-shadow:var(--shadow);transition:all var(--transition)}
+.feature-card:hover{box-shadow:var(--shadow-lg);transform:translateY(-2px)}
+.feature-card .fc-img{position:relative;min-height:380px;overflow:hidden}
+.feature-card .fc-img img{width:100%;height:100%;object-fit:cover;transition:transform 0.6s ease}
+.feature-card:hover .fc-img img{transform:scale(1.03)}
+.feature-card .fc-body{display:flex;flex-direction:column;justify-content:center;padding:40px 36px}
+.feature-card .fc-tag{font-size:0.62rem;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:var(--rust);margin-bottom:14px}
+.feature-card .fc-body h2{font-size:1.7rem;line-height:1.2;margin-bottom:12px}
+.feature-card .fc-body p{color:var(--ink-muted);font-size:0.92rem;line-height:1.6;margin-bottom:20px}
+.feature-card .fc-link{display:inline-flex;align-items:center;gap:8px;font-size:0.72rem;font-weight:600;text-transform:uppercase;letter-spacing:2px;color:var(--rust);align-self:flex-start}
+.feature-card .fc-link .arr{transition:transform var(--transition)}
+.feature-card:hover .fc-link .arr{transform:translateX(5px)}
 
-/* Card */
-.card{background:var(--bg-card);position:relative;overflow:hidden;transition:all var(--transition);display:flex;flex-direction:column}
-.card:hover{background:var(--bg-card-hover)}
-.card-img{position:relative;aspect-ratio:16/10;overflow:hidden;background:#0A0A0A}
-.card-img img{width:100%;height:100%;object-fit:cover;transition:transform 0.6s ease;filter:brightness(0.85)}
-.card:hover .card-img img{transform:scale(1.05);filter:brightness(1)}
-.card-body{padding:28px 30px 32px;flex:1;display:flex;flex-direction:column}
-.card-body h3{font-size:1.1rem;font-weight:600;line-height:1.35;margin-bottom:14px;flex:1}
-.card-body h3 a{color:var(--text-bright)}
-.card-body h3 a:hover{color:var(--gold)}
-.card-body .read-more{display:inline-flex;align-items:center;gap:6px;color:var(--gold);font-size:0.65rem;font-weight:500;letter-spacing:3px;text-transform:uppercase;margin-top:auto}
-.card-body .read-more .arrow{transition:transform var(--transition)}
-.card:hover .read-more .arrow{transform:translateX(4px)}
+/* Card Grid - varied */
+.card-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:24px}
+.card-grid-2col{display:grid;grid-template-columns:1fr 1fr;gap:24px}
 
-/* Horizontal Card */
-.card-h{display:grid;grid-template-columns:0.9fr 1.1fr;background:var(--bg-card);position:relative;overflow:hidden;transition:all var(--transition);min-height:240px}
-.card-h:hover{background:var(--bg-card-hover)}
-.card-h .card-img{aspect-ratio:auto;min-height:240px}
-.card-h .card-body{padding:32px 36px;justify-content:center}
-.card-h .card-body h3{font-size:1.2rem}
+/* Standard card */
+.card{background:var(--paper);border-radius:var(--radius-lg);overflow:hidden;border:1px solid var(--border);box-shadow:var(--shadow-sm);transition:all var(--transition);display:flex;flex-direction:column}
+.card:hover{box-shadow:var(--shadow-lg);transform:translateY(-3px)}
+.card .card-img-wrap{position:relative;aspect-ratio:3/2;overflow:hidden;background:var(--sand)}
+.card .card-img-wrap img{width:100%;height:100%;object-fit:cover;transition:transform 0.5s ease}
+.card:hover .card-img-wrap img{transform:scale(1.05)}
+.card .card-text{padding:22px 24px 26px;flex:1;display:flex;flex-direction:column}
+.card .card-text h3{font-size:1.15rem;line-height:1.3;margin-bottom:8px;flex:1}
+.card .card-text h3 a{color:var(--ink)}
+.card .card-text h3 a:hover{color:var(--rust)}
+.card .card-text .card-link{font-size:0.68rem;font-weight:600;text-transform:uppercase;letter-spacing:2px;color:var(--rust);margin-top:auto}
+.card .card-text .card-link span{display:inline-block;transition:transform var(--transition)}
+.card:hover .card-link span{transform:translateX(4px)}
 
-/* CTA Banner */
-.cta-banner{margin:0 0 90px;padding:70px 48px;text-align:center;background:var(--bg-card);border:1px solid var(--border);position:relative;overflow:hidden}
-.cta-banner::before{content:"";position:absolute;inset:0;background:radial-gradient(ellipse at center,var(--gold-pale) 0%,transparent 70%);pointer-events:none}
-.cta-banner h3{font-size:2rem;font-weight:700;margin-bottom:10px;position:relative}
-.cta-banner p{color:var(--text-muted);font-size:1rem;margin-bottom:28px;max-width:480px;margin-left:auto;margin-right:auto;font-family:"Cormorant Garamond",Georgia,serif;font-style:italic;position:relative}
-.cta-btn{display:inline-block;background:transparent;color:var(--gold);border:1px solid var(--gold);padding:14px 40px;font-size:0.7rem;font-weight:500;letter-spacing:3px;text-transform:uppercase;cursor:pointer;transition:all var(--transition);position:relative;font-family:"Montserrat",sans-serif}
-.cta-btn:hover{background:var(--gold);color:#0A0A0A}
+/* Wide horizontal card stack */
+.story-stack{display:flex;flex-direction:column;gap:1px;background:var(--border)}
+.story-item{display:grid;grid-template-columns:280px 1fr auto;gap:0;background:var(--paper);border:none;transition:all var(--transition);min-height:140px}
+.story-item:hover{background:var(--stone-warm)}
+.story-item .story-img{position:relative;overflow:hidden;background:var(--sand)}
+.story-item .story-img img{width:100%;height:100%;object-fit:cover;transition:transform 0.5s ease}
+.story-item:hover .story-img img{transform:scale(1.06)}
+.story-item .story-text{padding:24px 28px;display:flex;flex-direction:column;justify-content:center}
+.story-item .story-text h3{font-size:1.05rem;line-height:1.3;margin-bottom:4px}
+.story-item .story-text .story-meta{font-size:0.72rem;color:var(--ink-muted);font-family:"Crimson Text",Georgia,serif;font-style:italic}
+.story-item .story-arrow{display:flex;align-items:center;padding:0 24px;color:var(--sand-dark);font-size:1.3rem;transition:all var(--transition)}
+.story-item:hover .story-arrow{color:var(--rust);padding-right:20px}
+
+/* CTA block */
+.cta-block{background:var(--sand);border-radius:var(--radius-lg);padding:50px 40px;text-align:center;position:relative;overflow:hidden}
+.cta-block::before{content:"";position:absolute;top:-60px;right:-60px;width:200px;height:200px;border:2px solid var(--clay);border-radius:50%;opacity:0.1}
+.cta-block::after{content:"";position:absolute;bottom:-40px;left:-40px;width:120px;height:120px;border:2px solid var(--olive);border-radius:50%;opacity:0.1}
+.cta-block h3{font-size:1.8rem;margin-bottom:8px;position:relative}
+.cta-block p{color:var(--ink-light);font-size:0.95rem;margin-bottom:22px;max-width:460px;margin-left:auto;margin-right:auto;position:relative}
+.cta-btn{display:inline-block;background:var(--rust);color:#fff;padding:12px 34px;border-radius:30px;font-size:0.78rem;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;transition:all var(--transition);position:relative;font-family:"Work Sans",sans-serif}
+.cta-btn:hover{background:var(--clay);color:#fff;transform:translateY(-2px);box-shadow:0 6px 20px rgba(184,104,76,0.25)}
 
 /* Footer */
-.site-footer{background:#050505;border-top:1px solid rgba(200,164,92,0.12);padding:64px 0 32px;color:var(--text-muted)}
-.footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr;gap:50px;margin-bottom:44px}
-.footer-brand h3{font-family:"Playfair Display",Georgia,serif;font-size:1.4rem;color:var(--text-bright);margin-bottom:10px;letter-spacing:1px}
-.footer-brand p{color:var(--text-dim);font-size:0.85rem;line-height:1.7;max-width:320px;font-weight:300}
-.footer-brand .gold-dot{color:var(--gold)}
-.footer-links h4{color:var(--text-bright);font-size:0.65rem;text-transform:uppercase;letter-spacing:3px;margin-bottom:18px;font-family:"Montserrat",sans-serif;font-weight:500}
+.site-footer{background:#292018;color:rgba(255,255,255,0.65);padding:56px 0 28px;margin-top:auto}
+.footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr;gap:44px;margin-bottom:38px}
+.footer-brand h3{font-family:"DM Serif Display",Georgia,serif;font-size:1.3rem;color:#fff;margin-bottom:8px}
+.footer-brand p{color:rgba(255,255,255,0.4);font-size:0.85rem;line-height:1.6;max-width:300px}
+.footer-links h4{color:#fff;font-size:0.68rem;text-transform:uppercase;letter-spacing:2px;margin-bottom:14px;font-family:"Work Sans",sans-serif;font-weight:600}
 .footer-links ul{list-style:none}
-.footer-links li{margin-bottom:10px}
-.footer-links a{color:var(--text-dim);font-size:0.82rem;transition:color var(--transition);font-weight:300}
-.footer-links a:hover{color:var(--gold)}
-.footer-bottom{border-top:1px solid rgba(200,164,92,0.08);padding-top:24px;text-align:center;color:var(--text-dim);font-size:0.75rem;font-weight:300}
-.footer-bottom a{color:var(--text-dim)}
-.footer-bottom a:hover{color:var(--gold)}
-.footer-bottom .footer-links-row{display:flex;gap:20px;justify-content:center;margin-bottom:12px}
+.footer-links li{margin-bottom:9px}
+.footer-links a{color:rgba(255,255,255,0.4);font-size:0.85rem;transition:color var(--transition)}
+.footer-links a:hover{color:var(--rust-bright)}
+.footer-bottom{border-top:1px solid rgba(255,255,255,0.06);padding-top:20px;text-align:center;color:rgba(255,255,255,0.3);font-size:0.75rem}
+.footer-bottom a{color:rgba(255,255,255,0.3)}
+.footer-bottom a:hover{color:rgba(255,255,255,0.6)}
+.footer-bottom .footer-inline{display:flex;gap:18px;justify-content:center;margin-bottom:10px}
 
 /* Responsive */
-@media(max-width:960px){
-  .featured-card{grid-template-columns:1fr;min-height:auto}
-  .featured-card-img{min-height:320px}
-  .featured-card-body{padding:36px 28px}
-  .card-h{grid-template-columns:1fr;min-height:auto}
-  .card-h .card-img{min-height:200px}
-  .cards-grid-2{grid-template-columns:1fr}
-  .footer-grid{grid-template-columns:1fr 1fr;gap:32px}
-  .hero{min-height:70vh}
+@media(max-width:820px){
+  .feature-card{grid-template-columns:1fr}
+  .feature-card .fc-img{min-height:260px}
+  .feature-card .fc-body{padding:28px 22px}
+  .story-item{grid-template-columns:180px 1fr}
+  .story-item .story-arrow{display:none}
+  .card-grid-2col{grid-template-columns:1fr}
+  .footer-grid{grid-template-columns:1fr 1fr;gap:28px}
+  .hero{min-height:55vh}
+  .hero-content{padding:40px 20px 36px}
 }
-@media(max-width:640px){
+@media(max-width:560px){
   .header-nav{display:none}
-  .hero{min-height:60vh}
-  .hero h1{font-size:2.2rem}
-  .hero .hero-tagline{font-size:1rem}
-  .hero-badge{padding:6px 18px;font-size:0.6rem;letter-spacing:3px}
-  .cards-grid,.cards-grid-3{grid-template-columns:1fr}
-  .container{padding:0 20px}
-  .page-section,.page-section-alt{padding:56px 0}
-  .section-header{margin-bottom:36px}
-  .featured-wrap{padding:0 0 56px}
-  .cta-banner{padding:44px 24px}
-  .cta-banner h3{font-size:1.5rem}
-  .footer-grid{grid-template-columns:1fr;gap:28px}
-  .cards-grid-2{grid-template-columns:1fr}
-  .featured-card-body h2{font-size:1.4rem}
+  .hero{min-height:50vh}
+  .hero h1{font-size:1.8rem}
+  .hero .hero-sub{font-size:0.9rem}
+  .card-grid{grid-template-columns:1fr}
+  .story-item{grid-template-columns:120px 1fr}
+  .story-item .story-text{padding:16px}
+  .section{padding:44px 0}
+  .section-alt{padding:44px 0}
+  .wrap{padding:0 16px}
+  .wrap-wide{padding:0 16px}
+  .cta-block{padding:34px 20px}
+  .footer-grid{grid-template-columns:1fr;gap:24px}
+  .feature-card .fc-body h2{font-size:1.3rem}
 }
 </style>
 </head>
@@ -186,10 +202,10 @@ h1,h2,h3,h4{font-family:"Playfair Display",Georgia,serif;font-weight:700;color:v
 
 <!-- Header -->
 <header class="site-header">
-  <div class="container header-inner">
-    <a href="/" class="logo"><span class="logo-icon">&#9670;</span>SIX STARS</a>
+  <div class="wrap-wide header-inner">
+    <a href="/" class="logo"><span class="logo-mark"></span>Six Stars</a>
     <nav class="header-nav">
-      <a href="/">Home</a>
+      <a href="/">Journal</a>
       <a href="/about">About</a>
       <a href="/contact">Contact</a>
     </nav>
@@ -198,213 +214,199 @@ h1,h2,h3,h4{font-family:"Playfair Display",Georgia,serif;font-weight:700;color:v
 
 <!-- Hero -->
 <section class="hero">
-  <div class="hero-bg"></div>
-  <div class="hero-pattern"></div>
+  <div class="hero-img"><img src="/assets/montenegro-bay-kotor-luxury-yacht-escape-mid-range-budget.webp" alt="" aria-hidden="true"></div>
+  <div class="hero-overlay"></div>
   <div class="hero-content">
-    <span class="hero-badge">Luxury Travel</span>
-    <h1>Velvet <span class="gold">Trails</span></h1>
-    <p class="hero-tagline">Unearthing unparalleled luxury, without the exorbitant price tag</p>
-  </div>
-  <div class="hero-scroll">
-    <span></span>
-    <small>Discover</small>
+    <p class="hero-eyebrow">The Travel Journal</p>
+    <h1>Where the <span class="accent">wild</span> meets <br>the wonderful</h1>
+    <p class="hero-sub">Unearthing extraordinary places and experiences — without the pretension.</p>
   </div>
 </section>
 
-<!-- Ad: Header -->
-<div class="ad-slot">
-  <div id="ad-header-home"></div>
-</div>
+<!-- Ad -->
+<div class="ad-slot"><div id="ad-header-home"></div></div>
 
-<!-- Featured Article -->
-<div class="container featured-wrap">
-  <a href="/article/montenegro-bay-kotor-luxury-yacht-escape-mid-range-budget" class="featured-card">
-    <div class="featured-card-img">
-      <img src="/assets/montenegro-bay-kotor-luxury-yacht-escape-mid-range-budget.webp" alt="Montenegro's Bay of Kotor" loading="eager">
-    </div>
-    <div class="featured-card-body">
-      <span class="tag">Editor's Pick</span>
-      <h2>Montenegro's Bay of Kotor: A Luxury Yacht Escape on a Mid-Range Budget</h2>
-      <p>The Adriatic's best-kept secret delivers superyacht views, medieval walled towns, and five-star waterfront stays at a fraction of French Riviera prices.</p>
-      <span class="read-link">Read Article <span class="arrow">&rarr;</span></span>
-    </div>
-  </a>
-</div>
+<!-- Featured Story -->
+<section class="section">
+  <div class="wrap">
+    <a href="/article/montenegro-bay-kotor-luxury-yacht-escape-mid-range-budget" class="feature-card">
+      <div class="fc-img">
+        <img src="/assets/montenegro-bay-kotor-luxury-yacht-escape-mid-range-budget.webp" alt="Montenegro's Bay of Kotor" loading="eager">
+      </div>
+      <div class="fc-body">
+        <span class="fc-tag">Latest Dispatch</span>
+        <h2>Montenegro's Bay of Kotor: A Luxury Yacht Escape on a Mid-Range Budget</h2>
+        <p>The Adriatic's most dramatic coastline delivers medieval stone towns, mirror-calm fjords, and five-star waterfront stays at a fraction of what you'd pay on the French Riviera.</p>
+        <span class="fc-link">Read the story <span class="arr">→</span></span>
+      </div>
+    </a>
+  </div>
+</section>
 
-<!-- Section 1: Destinations -->
-<section class="page-section-alt">
-  <div class="container">
-    <div class="section-header">
-      <p class="section-eyebrow">Wanderlust</p>
-      <h2 class="section-title">Hidden Destinations</h2>
-      <p class="section-subtitle">Extraordinary places where luxury meets value</p>
-      <div class="gold-line"></div>
+<!-- Section: Destinations -->
+<section class="section-alt">
+  <div class="wrap">
+    <div class="section-head">
+      <p class="section-tag">Destinations</p>
+      <h2 class="section-title">Places that stay with you</h2>
+      <p class="section-desc">The kind of places you scribble in the margins of your passport</p>
     </div>
-    <div class="cards-grid">
-      <article class="card"><a href="/article/sicily-baroque-towns-five-star-stays-under-200"><div class="card-img"><img src="/assets/sicily-baroque-towns-five-star-stays-under-200.webp" alt="Sicily's Baroque Towns" loading="lazy"></div></a><div class="card-body"><h3><a href="/article/sicily-baroque-towns-five-star-stays-under-200">Secrets of Sicily's Baroque Towns: Five-Star Stays Under $200</a></h3><a href="/article/sicily-baroque-towns-five-star-stays-under-200" class="read-more">Read <span class="arrow">&rarr;</span></a></div></article>
-      <article class="card"><a href="/article/alpujarras-spain-hidden-villas-private-pools-less"><div class="card-img"><img src="/assets/alpujarras-spain-hidden-villas-private-pools-less.webp" alt="The Alpujarras" loading="lazy"></div></a><div class="card-body"><h3><a href="/article/alpujarras-spain-hidden-villas-private-pools-less">The Alpujarras: Spain's Hidden Mountain Villas Offering Private Pools for Less</a></h3><a href="/article/alpujarras-spain-hidden-villas-private-pools-less" class="read-more">Read <span class="arrow">&rarr;</span></a></div></article>
-      <article class="card"><a href="/article/vietnam-phu-quoc-island-opulent-resorts"><div class="card-img"><img src="/assets/vietnam-phu-quoc-island-opulent-resorts.webp" alt="Phu Quoc Island" loading="lazy"></div></a><div class="card-body"><h3><a href="/article/vietnam-phu-quoc-island-opulent-resorts">Vietnam's Phu Quoc Island: Opulent Beachfront Resorts Without the Bali Price Tag</a></h3><a href="/article/vietnam-phu-quoc-island-opulent-resorts" class="read-more">Read <span class="arrow">&rarr;</span></a></div></article>
-      <article class="card"><a href="/article/kyoto-traditional-ryokans-authentic-luxury-less"><div class="card-img"><img src="/assets/kyoto-traditional-ryokans-authentic-luxury-less.webp" alt="Kyoto Ryokans" loading="lazy"></div></a><div class="card-body"><h3><a href="/article/kyoto-traditional-ryokans-authentic-luxury-less">Kyoto's Traditional Ryokans: Authentic Luxury for Far Less Than Tokyo's Hotels</a></h3><a href="/article/kyoto-traditional-ryokans-authentic-luxury-less" class="read-more">Read <span class="arrow">&rarr;</span></a></div></article>
-      <article class="card"><a href="/article/colombia-cartagena-colonial-boutique-half-cost"><div class="card-img"><img src="/assets/colombia-cartagena-colonial-boutique-half-cost.webp" alt="Cartagena" loading="lazy"></div></a><div class="card-body"><h3><a href="/article/colombia-cartagena-colonial-boutique-half-cost">Colombia's Cartagena: Colonial Charm &amp; Boutique Stays at Half the Caribbean Cost</a></h3><a href="/article/colombia-cartagena-colonial-boutique-half-cost" class="read-more">Read <span class="arrow">&rarr;</span></a></div></article>
-      <article class="card"><a href="/article/sri-lanka-tea-country-five-star-bungalows-private-butlers"><div class="card-img"><img src="/assets/sri-lanka-tea-country-five-star-bungalows-private-butlers.webp" alt="Sri Lanka Tea Country" loading="lazy"></div></a><div class="card-body"><h3><a href="/article/sri-lanka-tea-country-five-star-bungalows-private-butlers">Sri Lanka's Tea Country: Five-Star Bungalows &amp; Private Butlers for Under $300</a></h3><a href="/article/sri-lanka-tea-country-five-star-bungalows-private-butlers" class="read-more">Read <span class="arrow">&rarr;</span></a></div></article>
-      <article class="card"><a href="/article/mexico-san-miguel-allende-artisanal-luxury-affordable"><div class="card-img"><img src="/assets/mexico-san-miguel-allende-artisanal-luxury-affordable.webp" alt="San Miguel de Allende" loading="lazy"></div></a><div class="card-body"><h3><a href="/article/mexico-san-miguel-allende-artisanal-luxury-affordable">Mexico's San Miguel de Allende: Artisanal Luxury &amp; Rooftop Views, Surprisingly Affordable</a></h3><a href="/article/mexico-san-miguel-allende-artisanal-luxury-affordable" class="read-more">Read <span class="arrow">&rarr;</span></a></div></article>
-      <article class="card"><a href="/article/georgia-kakheti-wine-region-boutique-wineries-castle-stays"><div class="card-img"><img src="/assets/georgia-kakheti-wine-region-boutique-wineries-castle-stays.webp" alt="Kakheti Wine Region" loading="lazy"></div></a><div class="card-body"><h3><a href="/article/georgia-kakheti-wine-region-boutique-wineries-castle-stays">Georgia's Kakheti Wine Region: Boutique Wineries &amp; Castle Stays for Next to Nothing</a></h3><a href="/article/georgia-kakheti-wine-region-boutique-wineries-castle-stays" class="read-more">Read <span class="arrow">&rarr;</span></a></div></article>
-      <article class="card"><a href="/article/oman-musandam-fjord-cruises-desert-glamping-dubai-price"><div class="card-img"><img src="/assets/oman-musandam-fjord-cruises-desert-glamping-dubai-price.webp" alt="Musandam Peninsula" loading="lazy"></div></a><div class="card-body"><h3><a href="/article/oman-musandam-fjord-cruises-desert-glamping-dubai-price">Oman's Musandam Peninsula: Fjord Cruises &amp; Desert Glamping Without the Dubai Price Tag</a></h3><a href="/article/oman-musandam-fjord-cruises-desert-glamping-dubai-price" class="read-more">Read <span class="arrow">&rarr;</span></a></div></article>
-      <article class="card"><a href="/article/albania-riviera-undiscovered-coastal-hotels-aegean-luxury"><div class="card-img"><img src="/assets/albania-riviera-undiscovered-coastal-hotels-aegean-luxury.webp" alt="Albania Riviera" loading="lazy"></div></a><div class="card-body"><h3><a href="/article/albania-riviera-undiscovered-coastal-hotels-aegean-luxury">Albania's Riviera: Undiscovered Coastal Hotels Delivering Aegean-Level Luxury</a></h3><a href="/article/albania-riviera-undiscovered-coastal-hotels-aegean-luxury" class="read-more">Read <span class="arrow">&rarr;</span></a></div></article>
-      <article class="card"><a href="/article/portugal-alentejo-vineyard-resorts-historic-estates"><div class="card-img"><img src="/assets/portugal-alentejo-vineyard-resorts-historic-estates.webp" alt="Alentejo Region" loading="lazy"></div></a><div class="card-body"><h3><a href="/article/portugal-alentejo-vineyard-resorts-historic-estates">Portugal's Alentejo Region: Vineyard Resorts &amp; Historic Estates Offering Quiet Opulence</a></h3><a href="/article/portugal-alentejo-vineyard-resorts-historic-estates" class="read-more">Read <span class="arrow">&rarr;</span></a></div></article>
-      <article class="card"><a href="/article/tunisia-djerba-island-designer-villas-thalassotherapy"><div class="card-img"><img src="/assets/tunisia-djerba-island-designer-villas-thalassotherapy.webp" alt="Djerba Island" loading="lazy"></div></a><div class="card-body"><h3><a href="/article/tunisia-djerba-island-designer-villas-thalassotherapy">Tunisia's Djerba Island: Designer Villas &amp; Thalassotherapy Resorts for Less Than Greece</a></h3><a href="/article/tunisia-djerba-island-designer-villas-thalassotherapy" class="read-more">Read <span class="arrow">&rarr;</span></a></div></article>
-      <article class="card"><a href="/article/romania-transylvania-medieval-castles-private-manors"><div class="card-img"><img src="/assets/romania-transylvania-medieval-castles-private-manors.webp" alt="Transylvania" loading="lazy"></div></a><div class="card-body"><h3><a href="/article/romania-transylvania-medieval-castles-private-manors">Romania's Transylvania: Medieval Castles &amp; Private Manors Offering Royal Stays</a></h3><a href="/article/romania-transylvania-medieval-castles-private-manors" class="read-more">Read <span class="arrow">&rarr;</span></a></div></article>
-      <article class="card"><a href="/article/croatia-istrian-peninsula-truffle-hunting-vineyard-estates"><div class="card-img"><img src="/assets/croatia-istrian-peninsula-truffle-hunting-vineyard-estates.webp" alt="Istrian Peninsula" loading="lazy"></div></a><div class="card-body"><h3><a href="/article/croatia-istrian-peninsula-truffle-hunting-vineyard-estates">Croatia's Istrian Peninsula: Truffle Hunting &amp; Vineyard Estates for Mediterranean Luxury</a></h3><a href="/article/croatia-istrian-peninsula-truffle-hunting-vineyard-estates" class="read-more">Read <span class="arrow">&rarr;</span></a></div></article>
-      <article class="card"><a href="/article/uruguay-jose-ignacio-bohemian-chic-beachfront-villas"><div class="card-img"><img src="/assets/uruguay-jose-ignacio-bohemian-chic-beachfront-villas.webp" alt="Jose Ignacio" loading="lazy"></div></a><div class="card-body"><h3><a href="/article/uruguay-jose-ignacio-bohemian-chic-beachfront-villas">Uruguay's Jose Ignacio: Bohemian Chic Beachfront Villas, A South American St Tropez</a></h3><a href="/article/uruguay-jose-ignacio-bohemian-chic-beachfront-villas" class="read-more">Read <span class="arrow">&rarr;</span></a></div></article>
-      <article class="card"><a href="/article/philippines-palawan-private-island-resorts-less"><div class="card-img"><img src="/assets/philippines-palawan-private-island-resorts-less.webp" alt="Palawan" loading="lazy"></div></a><div class="card-body"><h3><a href="/article/philippines-palawan-private-island-resorts-less">The Philippines' Palawan: Private Island Resorts Offering Unrivaled Beauty for Less</a></h3><a href="/article/philippines-palawan-private-island-resorts-less" class="read-more">Read <span class="arrow">&rarr;</span></a></div></article>
-      <article class="card"><a href="/article/slovenia-lake-bled-fairytale-castle-hotels-alpine-luxury"><div class="card-img"><img src="/assets/slovenia-lake-bled-fairytale-castle-hotels-alpine-luxury.webp" alt="Lake Bled" loading="lazy"></div></a><div class="card-body"><h3><a href="/article/slovenia-lake-bled-fairytale-castle-hotels-alpine-luxury">Slovenia's Lake Bled: Fairytale Castle Hotels &amp; Alpine Luxury on a Budget</a></h3><a href="/article/slovenia-lake-bled-fairytale-castle-hotels-alpine-luxury" class="read-more">Read <span class="arrow">&rarr;</span></a></div></article>
-      <article class="card"><a href="/article/montenegro-lustica-bay-new-riviera-marina-luxury"><div class="card-img"><img src="/assets/montenegro-lustica-bay-new-riviera-marina-luxury.webp" alt="Lustica Bay" loading="lazy"></div></a><div class="card-body"><h3><a href="/article/montenegro-lustica-bay-new-riviera-marina-luxury">Montenegro's Lustica Bay: New Riviera Developments Offering Marina Luxury at Founding Prices</a></h3><a href="/article/montenegro-lustica-bay-new-riviera-marina-luxury" class="read-more">Read <span class="arrow">&rarr;</span></a></div></article>
-      <article class="card"><a href="/article/bulgaria-veliko-tarnovo-historic-boutique-royal-views"><div class="card-img"><img src="/assets/bulgaria-veliko-tarnovo-historic-boutique-royal-views.webp" alt="Veliko Tarnovo" loading="lazy"></div></a><div class="card-body"><h3><a href="/article/bulgaria-veliko-tarnovo-historic-boutique-royal-views">Bulgaria's Veliko Tarnovo: Historic Boutique Hotels &amp; Royal Views for Next to Nothing</a></h3><a href="/article/bulgaria-veliko-tarnovo-historic-boutique-royal-views" class="read-more">Read <span class="arrow">&rarr;</span></a></div></article>
-      <article class="card"><a href="/article/santorini-milos-greece-iconic-luxury-hidden-gems"><div class="card-img"><img src="/assets/santorini-milos-greece-iconic-luxury-hidden-gems.webp" alt="Santorini to Milos" loading="lazy"></div></a><div class="card-body"><h3><a href="/article/santorini-milos-greece-iconic-luxury-hidden-gems">From Santorini to Milos: Is Greece's Iconic Luxury Worth the Premium Over Hidden Gems?</a></h3><a href="/article/santorini-milos-greece-iconic-luxury-hidden-gems" class="read-more">Read <span class="arrow">&rarr;</span></a></div></article>
-      <article class="card"><a href="/article/swiss-alps-chalet-dolomites-boutique-hotel-ski-luxury"><div class="card-img"><img src="/assets/swiss-alps-chalet-dolomites-boutique-hotel-ski-luxury.webp" alt="Swiss Alps" loading="lazy"></div></a><div class="card-body"><h3><a href="/article/swiss-alps-chalet-dolomites-boutique-hotel-ski-luxury">Swiss Alps Chalet vs. Dolomites Boutique Hotel: Which Offers Better Value for Ski Luxury?</a></h3><a href="/article/swiss-alps-chalet-dolomites-boutique-hotel-ski-luxury" class="read-more">Read <span class="arrow">&rarr;</span></a></div></article>
-      <article class="card"><a href="/article/beachfront-villas-costa-rica-pacific-nicaragua-emerald-coast"><div class="card-img"><img src="/assets/beachfront-villas-costa-rica-pacific-nicaragua-emerald-coast.webp" alt="Beachfront Villas" loading="lazy"></div></a><div class="card-body"><h3><a href="/article/beachfront-villas-costa-rica-pacific-nicaragua-emerald-coast">Beachfront Villas: Costa Rica's Pacific Coast vs. Nicaragua's Emerald Coast for Value</a></h3><a href="/article/beachfront-villas-costa-rica-pacific-nicaragua-emerald-coast" class="read-more">Read <span class="arrow">&rarr;</span></a></div></article>
+    <div class="card-grid">
+      <article class="card"><a href="/article/sicily-baroque-towns-five-star-stays-under-200"><div class="card-img-wrap"><img src="/assets/sicily-baroque-towns-five-star-stays-under-200.webp" alt="" loading="lazy"></div></a><div class="card-text"><h3><a href="/article/sicily-baroque-towns-five-star-stays-under-200">Secrets of Sicily's Baroque Towns: Five-Star Stays Under $200</a></h3><a href="/article/sicily-baroque-towns-five-star-stays-under-200" class="card-link">Read <span>→</span></a></div></article>
+      <article class="card"><a href="/article/alpujarras-spain-hidden-villas-private-pools-less"><div class="card-img-wrap"><img src="/assets/alpujarras-spain-hidden-villas-private-pools-less.webp" alt="" loading="lazy"></div></a><div class="card-text"><h3><a href="/article/alpujarras-spain-hidden-villas-private-pools-less">The Alpujarras: Spain's Hidden Mountain Villas with Private Pools for Less</a></h3><a href="/article/alpujarras-spain-hidden-villas-private-pools-less" class="card-link">Read <span>→</span></a></div></article>
+      <article class="card"><a href="/article/vietnam-phu-quoc-island-opulent-resorts"><div class="card-img-wrap"><img src="/assets/vietnam-phu-quoc-island-opulent-resorts.webp" alt="" loading="lazy"></div></a><div class="card-text"><h3><a href="/article/vietnam-phu-quoc-island-opulent-resorts">Vietnam's Phu Quoc Island: Opulent Beachfront Resorts Without the Bali Price Tag</a></h3><a href="/article/vietnam-phu-quoc-island-opulent-resorts" class="card-link">Read <span>→</span></a></div></article>
+      <article class="card"><a href="/article/kyoto-traditional-ryokans-authentic-luxury-less"><div class="card-img-wrap"><img src="/assets/kyoto-traditional-ryokans-authentic-luxury-less.webp" alt="" loading="lazy"></div></a><div class="card-text"><h3><a href="/article/kyoto-traditional-ryokans-authentic-luxury-less">Kyoto's Traditional Ryokans: Authentic Luxury for Far Less Than Tokyo's Hotels</a></h3><a href="/article/kyoto-traditional-ryokans-authentic-luxury-less" class="card-link">Read <span>→</span></a></div></article>
+      <article class="card"><a href="/article/colombia-cartagena-colonial-boutique-half-cost"><div class="card-img-wrap"><img src="/assets/colombia-cartagena-colonial-boutique-half-cost.webp" alt="" loading="lazy"></div></a><div class="card-text"><h3><a href="/article/colombia-cartagena-colonial-boutique-half-cost">Colombia's Cartagena: Colonial Charm & Boutique Stays at Half the Caribbean Cost</a></h3><a href="/article/colombia-cartagena-colonial-boutique-half-cost" class="card-link">Read <span>→</span></a></div></article>
+      <article class="card"><a href="/article/sri-lanka-tea-country-five-star-bungalows-private-butlers"><div class="card-img-wrap"><img src="/assets/sri-lanka-tea-country-five-star-bungalows-private-butlers.webp" alt="" loading="lazy"></div></a><div class="card-text"><h3><a href="/article/sri-lanka-tea-country-five-star-bungalows-private-butlers">Sri Lanka's Tea Country: Five-Star Bungalows & Private Butlers for Under $300</a></h3><a href="/article/sri-lanka-tea-country-five-star-bungalows-private-butlers" class="card-link">Read <span>→</span></a></div></article>
+      <article class="card"><a href="/article/mexico-san-miguel-allende-artisanal-luxury-affordable"><div class="card-img-wrap"><img src="/assets/mexico-san-miguel-allende-artisanal-luxury-affordable.webp" alt="" loading="lazy"></div></a><div class="card-text"><h3><a href="/article/mexico-san-miguel-allende-artisanal-luxury-affordable">Mexico's San Miguel de Allende: Artisanal Luxury & Rooftop Views, Surprisingly Affordable</a></h3><a href="/article/mexico-san-miguel-allende-artisanal-luxury-affordable" class="card-link">Read <span>→</span></a></div></article>
+      <article class="card"><a href="/article/georgia-kakheti-wine-region-boutique-wineries-castle-stays"><div class="card-img-wrap"><img src="/assets/georgia-kakheti-wine-region-boutique-wineries-castle-stays.webp" alt="" loading="lazy"></div></a><div class="card-text"><h3><a href="/article/georgia-kakheti-wine-region-boutique-wineries-castle-stays">Georgia's Kakheti Wine Region: Boutique Wineries & Castle Stays for Next to Nothing</a></h3><a href="/article/georgia-kakheti-wine-region-boutique-wineries-castle-stays" class="card-link">Read <span>→</span></a></div></article>
+      <article class="card"><a href="/article/oman-musandam-fjord-cruises-desert-glamping-dubai-price"><div class="card-img-wrap"><img src="/assets/oman-musandam-fjord-cruises-desert-glamping-dubai-price.webp" alt="" loading="lazy"></div></a><div class="card-text"><h3><a href="/article/oman-musandam-fjord-cruises-desert-glamping-dubai-price">Oman's Musandam Peninsula: Fjord Cruises & Desert Glamping Without the Dubai Price</a></h3><a href="/article/oman-musandam-fjord-cruises-desert-glamping-dubai-price" class="card-link">Read <span>→</span></a></div></article>
+      <article class="card"><a href="/article/albania-riviera-undiscovered-coastal-hotels-aegean-luxury"><div class="card-img-wrap"><img src="/assets/albania-riviera-undiscovered-coastal-hotels-aegean-luxury.webp" alt="" loading="lazy"></div></a><div class="card-text"><h3><a href="/article/albania-riviera-undiscovered-coastal-hotels-aegean-luxury">Albania's Riviera: Undiscovered Coastal Hotels Delivering Aegean-Level Luxury</a></h3><a href="/article/albania-riviera-undiscovered-coastal-hotels-aegean-luxury" class="card-link">Read <span>→</span></a></div></article>
+      <article class="card"><a href="/article/portugal-alentejo-vineyard-resorts-historic-estates"><div class="card-img-wrap"><img src="/assets/portugal-alentejo-vineyard-resorts-historic-estates.webp" alt="" loading="lazy"></div></a><div class="card-text"><h3><a href="/article/portugal-alentejo-vineyard-resorts-historic-estates">Portugal's Alentejo Region: Vineyard Resorts & Historic Estates Offering Quiet Opulence</a></h3><a href="/article/portugal-alentejo-vineyard-resorts-historic-estates" class="card-link">Read <span>→</span></a></div></article>
+      <article class="card"><a href="/article/tunisia-djerba-island-designer-villas-thalassotherapy"><div class="card-img-wrap"><img src="/assets/tunisia-djerba-island-designer-villas-thalassotherapy.webp" alt="" loading="lazy"></div></a><div class="card-text"><h3><a href="/article/tunisia-djerba-island-designer-villas-thalassotherapy">Tunisia's Djerba Island: Designer Villas & Thalassotherapy Resorts for Less Than Greece</a></h3><a href="/article/tunisia-djerba-island-designer-villas-thalassotherapy" class="card-link">Read <span>→</span></a></div></article>
+      <article class="card"><a href="/article/romania-transylvania-medieval-castles-private-manors"><div class="card-img-wrap"><img src="/assets/romania-transylvania-medieval-castles-private-manors.webp" alt="" loading="lazy"></div></a><div class="card-text"><h3><a href="/article/romania-transylvania-medieval-castles-private-manors">Romania's Transylvania: Medieval Castles & Private Manors Offering Royal Stays</a></h3><a href="/article/romania-transylvania-medieval-castles-private-manors" class="card-link">Read <span>→</span></a></div></article>
+      <article class="card"><a href="/article/croatia-istrian-peninsula-truffle-hunting-vineyard-estates"><div class="card-img-wrap"><img src="/assets/croatia-istrian-peninsula-truffle-hunting-vineyard-estates.webp" alt="" loading="lazy"></div></a><div class="card-text"><h3><a href="/article/croatia-istrian-peninsula-truffle-hunting-vineyard-estates">Croatia's Istrian Peninsula: Truffle Hunting & Vineyard Estates for Mediterranean Luxury</a></h3><a href="/article/croatia-istrian-peninsula-truffle-hunting-vineyard-estates" class="card-link">Read <span>→</span></a></div></article>
+      <article class="card"><a href="/article/uruguay-jose-ignacio-bohemian-chic-beachfront-villas"><div class="card-img-wrap"><img src="/assets/uruguay-jose-ignacio-bohemian-chic-beachfront-villas.webp" alt="" loading="lazy"></div></a><div class="card-text"><h3><a href="/article/uruguay-jose-ignacio-bohemian-chic-beachfront-villas">Uruguay's Jose Ignacio: Bohemian Chic Beachfront Villas, A South American St Tropez</a></h3><a href="/article/uruguay-jose-ignacio-bohemian-chic-beachfront-villas" class="card-link">Read <span>→</span></a></div></article>
+      <article class="card"><a href="/article/philippines-palawan-private-island-resorts-less"><div class="card-img-wrap"><img src="/assets/philippines-palawan-private-island-resorts-less.webp" alt="" loading="lazy"></div></a><div class="card-text"><h3><a href="/article/philippines-palawan-private-island-resorts-less">The Philippines' Palawan: Private Island Resorts Offering Unrivaled Beauty for Less</a></h3><a href="/article/philippines-palawan-private-island-resorts-less" class="card-link">Read <span>→</span></a></div></article>
+      <article class="card"><a href="/article/slovenia-lake-bled-fairytale-castle-hotels-alpine-luxury"><div class="card-img-wrap"><img src="/assets/slovenia-lake-bled-fairytale-castle-hotels-alpine-luxury.webp" alt="" loading="lazy"></div></a><div class="card-text"><h3><a href="/article/slovenia-lake-bled-fairytale-castle-hotels-alpine-luxury">Slovenia's Lake Bled: Fairytale Castle Hotels & Alpine Luxury on a Budget</a></h3><a href="/article/slovenia-lake-bled-fairytale-castle-hotels-alpine-luxury" class="card-link">Read <span>→</span></a></div></article>
+      <article class="card"><a href="/article/montenegro-lustica-bay-new-riviera-marina-luxury"><div class="card-img-wrap"><img src="/assets/montenegro-lustica-bay-new-riviera-marina-luxury.webp" alt="" loading="lazy"></div></a><div class="card-text"><h3><a href="/article/montenegro-lustica-bay-new-riviera-marina-luxury">Montenegro's Lustica Bay: New Riviera Developments Offering Marina Luxury at Founding Prices</a></h3><a href="/article/montenegro-lustica-bay-new-riviera-marina-luxury" class="card-link">Read <span>→</span></a></div></article>
+      <article class="card"><a href="/article/bulgaria-veliko-tarnovo-historic-boutique-royal-views"><div class="card-img-wrap"><img src="/assets/bulgaria-veliko-tarnovo-historic-boutique-royal-views.webp" alt="" loading="lazy"></div></a><div class="card-text"><h3><a href="/article/bulgaria-veliko-tarnovo-historic-boutique-royal-views">Bulgaria's Veliko Tarnovo: Historic Boutique Hotels & Royal Views for Next to Nothing</a></h3><a href="/article/bulgaria-veliko-tarnovo-historic-boutique-royal-views" class="card-link">Read <span>→</span></a></div></article>
+      <article class="card"><a href="/article/santorini-milos-greece-iconic-luxury-hidden-gems"><div class="card-img-wrap"><img src="/assets/santorini-milos-greece-iconic-luxury-hidden-gems.webp" alt="" loading="lazy"></div></a><div class="card-text"><h3><a href="/article/santorini-milos-greece-iconic-luxury-hidden-gems">From Santorini to Milos: Is Greece's Iconic Luxury Worth the Premium Over Hidden Gems?</a></h3><a href="/article/santorini-milos-greece-iconic-luxury-hidden-gems" class="card-link">Read <span>→</span></a></div></article>
+      <article class="card"><a href="/article/swiss-alps-chalet-dolomites-boutique-hotel-ski-luxury"><div class="card-img-wrap"><img src="/assets/swiss-alps-chalet-dolomites-boutique-hotel-ski-luxury.webp" alt="" loading="lazy"></div></a><div class="card-text"><h3><a href="/article/swiss-alps-chalet-dolomites-boutique-hotel-ski-luxury">Swiss Alps Chalet vs. Dolomites Boutique Hotel: Which Offers Better Value for Ski Luxury?</a></h3><a href="/article/swiss-alps-chalet-dolomites-boutique-hotel-ski-luxury" class="card-link">Read <span>→</span></a></div></article>
+      <article class="card"><a href="/article/beachfront-villas-costa-rica-pacific-nicaragua-emerald-coast"><div class="card-img-wrap"><img src="/assets/beachfront-villas-costa-rica-pacific-nicaragua-emerald-coast.webp" alt="" loading="lazy"></div></a><div class="card-text"><h3><a href="/article/beachfront-villas-costa-rica-pacific-nicaragua-emerald-coast">Beachfront Villas: Costa Rica's Pacific Coast vs. Nicaragua's Emerald Coast for Value</a></h3><a href="/article/beachfront-villas-costa-rica-pacific-nicaragua-emerald-coast" class="card-link">Read <span>→</span></a></div></article>
     </div>
   </div>
 </section>
 
-<!-- Ad: Middle -->
-<div class="ad-slot">
-  <div id="ad-middle-home"></div>
-</div>
+<!-- Ad -->
+<div class="ad-slot"><div id="ad-middle-home"></div></div>
 
-<!-- Section 2: Smart Travel -->
-<section class="page-section">
-  <div class="container">
-    <div class="section-header">
-      <p class="section-eyebrow">Insider Knowledge</p>
-      <h2 class="section-title">Travel Smarter</h2>
-      <p class="section-subtitle">Proven strategies to unlock five-star experiences on any budget</p>
-      <div class="gold-line"></div>
+<!-- Section: Smart Travel (story stack layout) -->
+<section class="section">
+  <div class="wrap">
+    <div class="section-head center">
+      <p class="section-tag">Field Notes</p>
+      <h2 class="section-title">How to travel better</h2>
+      <p class="section-desc">No hacks. No listicles. Just hard-won wisdom from the road.</p>
     </div>
-    <div class="cards-grid">
-      <article class="card"><a href="/article/mastering-off-season-travel-five-star-peak-prices"><div class="card-img"><img src="/assets/mastering-off-season-travel-five-star-peak-prices.webp" alt="Off-Season Travel" loading="lazy"></div></a><div class="card-body"><h3><a href="/article/mastering-off-season-travel-five-star-peak-prices">Mastering Off-Season Travel: How to Secure Five-Star Hotels for Peak-Season Prices</a></h3><a href="/article/mastering-off-season-travel-five-star-peak-prices" class="read-more">Read <span class="arrow">&rarr;</span></a></div></article>
-      <article class="card"><a href="/article/art-upgrade-business-class-economy-fares"><div class="card-img"><img src="/assets/art-upgrade-business-class-economy-fares.webp" alt="The Art of the Upgrade" loading="lazy"></div></a><div class="card-body"><h3><a href="/article/art-upgrade-business-class-economy-fares">The Art of the Upgrade: Nailing Business Class Flights for Economy Fares</a></h3><a href="/article/art-upgrade-business-class-economy-fares" class="read-more">Read <span class="arrow">&rarr;</span></a></div></article>
-      <article class="card"><a href="/article/private-villa-luxury-hotel-maximum-value"><div class="card-img"><img src="/assets/private-villa-luxury-hotel-maximum-value.webp" alt="Private Villa vs Hotel" loading="lazy"></div></a><div class="card-body"><h3><a href="/article/private-villa-luxury-hotel-maximum-value">Private Villa vs. Luxury Hotel: When to Choose Each for Maximum Value</a></h3><a href="/article/private-villa-luxury-hotel-maximum-value" class="read-more">Read <span class="arrow">&rarr;</span></a></div></article>
-      <article class="card"><a href="/article/hacking-hotel-loyalty-programs-elite-status-upgrades"><div class="card-img"><img src="/assets/hacking-hotel-loyalty-programs-elite-status-upgrades.webp" alt="Hotel Loyalty Programs" loading="lazy"></div></a><div class="card-body"><h3><a href="/article/hacking-hotel-loyalty-programs-elite-status-upgrades">Hacking Hotel Loyalty Programs: Earning Elite Status for Free Upgrades and Perks</a></h3><a href="/article/hacking-hotel-loyalty-programs-elite-status-upgrades" class="read-more">Read <span class="arrow">&rarr;</span></a></div></article>
-      <article class="card"><a href="/article/dining-billionaire-michelin-starred-mid-range-budget"><div class="card-img"><img src="/assets/dining-billionaire-michelin-starred-mid-range-budget.webp" alt="Dining Like a Billionaire" loading="lazy"></div></a><div class="card-body"><h3><a href="/article/dining-billionaire-michelin-starred-mid-range-budget">Dining Like a Billionaire: Michelin-Starred Meals on a Mid-Range Budget</a></h3><a href="/article/dining-billionaire-michelin-starred-mid-range-budget" class="read-more">Read <span class="arrow">&rarr;</span></a></div></article>
-      <article class="card"><a href="/article/savvy-traveler-private-jet-charters-shared-empty-leg"><div class="card-img"><img src="/assets/savvy-traveler-private-jet-charters-shared-empty-leg.webp" alt="Private Jet Charters" loading="lazy"></div></a><div class="card-body"><h3><a href="/article/savvy-traveler-private-jet-charters-shared-empty-leg">The Savvy Traveler's Guide to Private Jet Charters: Shared Flights &amp; Empty Leg Deals</a></h3><a href="/article/savvy-traveler-private-jet-charters-shared-empty-leg" class="read-more">Read <span class="arrow">&rarr;</span></a></div></article>
-      <article class="card"><a href="/article/maximizing-travel-credit-card-perks-lounge-access-hotel-credits"><div class="card-img"><img src="/assets/maximizing-travel-credit-card-perks-lounge-access-hotel-credits.webp" alt="Credit Card Perks" loading="lazy"></div></a><div class="card-body"><h3><a href="/article/maximizing-travel-credit-card-perks-lounge-access-hotel-credits">Maximizing Travel Credit Card Perks: Free Lounge Access &amp; Hotel Credits</a></h3><a href="/article/maximizing-travel-credit-card-perks-lounge-access-hotel-credits" class="read-more">Read <span class="arrow">&rarr;</span></a></div></article>
-      <article class="card"><a href="/article/art-negotiation-room-upgrades-late-checkouts-free"><div class="card-img"><img src="/assets/art-negotiation-room-upgrades-late-checkouts-free.webp" alt="Art of Negotiation" loading="lazy"></div></a><div class="card-body"><h3><a href="/article/art-negotiation-room-upgrades-late-checkouts-free">The Art of Negotiation: Getting Room Upgrades and Late Checkouts for Free</a></h3><a href="/article/art-negotiation-room-upgrades-late-checkouts-free" class="read-more">Read <span class="arrow">&rarr;</span></a></div></article>
-      <article class="card"><a href="/article/curating-bespoke-itinerary-diy-luxury-travel-planning-savings"><div class="card-img"><img src="/assets/curating-bespoke-itinerary-diy-luxury-travel-planning-savings.webp" alt="Bespoke Itinerary" loading="lazy"></div></a><div class="card-body"><h3><a href="/article/curating-bespoke-itinerary-diy-luxury-travel-planning-savings">Curating a Bespoke Itinerary: DIY Luxury Travel Planning for Significant Savings</a></h3><a href="/article/curating-bespoke-itinerary-diy-luxury-travel-planning-savings" class="read-more">Read <span class="arrow">&rarr;</span></a></div></article>
-      <article class="card"><a href="/article/concierge-services-budget-vip-treatment"><div class="card-img"><img src="/assets/concierge-services-budget-vip-treatment.webp" alt="Concierge on a Budget" loading="lazy"></div></a><div class="card-body"><h3><a href="/article/concierge-services-budget-vip-treatment">Concierge Services on a Budget: How to Get VIP Treatment Without the Price Tag</a></h3><a href="/article/concierge-services-budget-vip-treatment" class="read-more">Read <span class="arrow">&rarr;</span></a></div></article>
-      <article class="card"><a href="/article/beyond-tour-bus-private-drivers-guides"><div class="card-img"><img src="/assets/beyond-tour-bus-private-drivers-guides.webp" alt="Beyond the Tour Bus" loading="lazy"></div></a><div class="card-body"><h3><a href="/article/beyond-tour-bus-private-drivers-guides">Beyond the Tour Bus: Arranging Private Drivers &amp; Guides for Experiential Luxury</a></h3><a href="/article/beyond-tour-bus-private-drivers-guides" class="read-more">Read <span class="arrow">&rarr;</span></a></div></article>
-      <article class="card"><a href="/article/finding-undervalued-destinations-emerging-luxury-investment"><div class="card-img"><img src="/assets/finding-undervalued-destinations-emerging-luxury-investment.webp" alt="Undervalued Destinations" loading="lazy"></div></a><div class="card-body"><h3><a href="/article/finding-undervalued-destinations-emerging-luxury-investment">Finding Undervalued Destinations: Where to Seek Emerging Luxury for Smart Investment</a></h3><a href="/article/finding-undervalued-destinations-emerging-luxury-investment" class="read-more">Read <span class="arrow">&rarr;</span></a></div></article>
-      <article class="card"><a href="/article/securing-exclusive-access-private-estates-hidden-gardens"><div class="card-img"><img src="/assets/securing-exclusive-access-private-estates-hidden-gardens.webp" alt="Exclusive Access" loading="lazy"></div></a><div class="card-body"><h3><a href="/article/securing-exclusive-access-private-estates-hidden-gardens">Securing Exclusive Access: How to Visit Private Estates &amp; Hidden Gardens Affordably</a></h3><a href="/article/securing-exclusive-access-private-estates-hidden-gardens" class="read-more">Read <span class="arrow">&rarr;</span></a></div></article>
-      <article class="card"><a href="/article/savvy-shopper-high-end-souvenirs-fashion-abroad"><div class="card-img"><img src="/assets/savvy-shopper-high-end-souvenirs-fashion-abroad.webp" alt="Savvy Shopper" loading="lazy"></div></a><div class="card-body"><h3><a href="/article/savvy-shopper-high-end-souvenirs-fashion-abroad">The Savvy Shopper's Guide: Finding High-End Souvenirs &amp; Fashion for Less Abroad</a></h3><a href="/article/savvy-shopper-high-end-souvenirs-fashion-abroad" class="read-more">Read <span class="arrow">&rarr;</span></a></div></article>
-      <article class="card"><a href="/article/luxury-cruise-deals-private-balconies-suite-upgrades"><div class="card-img"><img src="/assets/luxury-cruise-deals-private-balconies-suite-upgrades.webp" alt="Luxury Cruise Deals" loading="lazy"></div></a><div class="card-body"><h3><a href="/article/luxury-cruise-deals-private-balconies-suite-upgrades">Luxury Cruise Deals: Booking Private Balconies &amp; Suite Upgrades Without the Premium</a></h3><a href="/article/luxury-cruise-deals-private-balconies-suite-upgrades" class="read-more">Read <span class="arrow">&rarr;</span></a></div></article>
-      <article class="card"><a href="/article/renting-luxury-cars-less-exotic-drives-budget"><div class="card-img"><img src="/assets/renting-luxury-cars-less-exotic-drives-budget.webp" alt="Renting Luxury Cars" loading="lazy"></div></a><div class="card-body"><h3><a href="/article/renting-luxury-cars-less-exotic-drives-budget">Renting Luxury Cars for Less: Exotic Drives on a Budget</a></h3><a href="/article/renting-luxury-cars-less-exotic-drives-budget" class="read-more">Read <span class="arrow">&rarr;</span></a></div></article>
-      <article class="card"><a href="/article/power-group-bookings-unlocking-discounts-luxury-experiences"><div class="card-img"><img src="/assets/power-group-bookings-unlocking-discounts-luxury-experiences.webp" alt="Group Bookings" loading="lazy"></div></a><div class="card-body"><h3><a href="/article/power-group-bookings-unlocking-discounts-luxury-experiences">The Power of Group Bookings: Unlocking Discounts for Luxury Experiences</a></h3><a href="/article/power-group-bookings-unlocking-discounts-luxury-experiences" class="read-more">Read <span class="arrow">&rarr;</span></a></div></article>
-      <article class="card"><a href="/article/art-pre-booking-exclusive-experiences"><div class="card-img"><img src="/assets/art-pre-booking-exclusive-experiences.webp" alt="Pre-Booking" loading="lazy"></div></a><div class="card-body"><h3><a href="/article/art-pre-booking-exclusive-experiences">The Art of the Pre-Booking: Securing Exclusive Experiences Before They Sell Out</a></h3><a href="/article/art-pre-booking-exclusive-experiences" class="read-more">Read <span class="arrow">&rarr;</span></a></div></article>
-      <article class="card"><a href="/article/maximizing-time-efficient-luxurious-itineraries-short-trips"><div class="card-img"><img src="/assets/maximizing-time-efficient-luxurious-itineraries-short-trips.webp" alt="Maximizing Your Time" loading="lazy"></div></a><div class="card-body"><h3><a href="/article/maximizing-time-efficient-luxurious-itineraries-short-trips">Maximizing Your Time: How to Plan Efficient, Luxurious Itineraries for Short Trips</a></h3><a href="/article/maximizing-time-efficient-luxurious-itineraries-short-trips" class="read-more">Read <span class="arrow">&rarr;</span></a></div></article>
+    <div class="story-stack">
+      <a href="/article/mastering-off-season-travel-five-star-peak-prices" class="story-item"><div class="story-img"><img src="/assets/mastering-off-season-travel-five-star-peak-prices.webp" alt="" loading="lazy"></div><div class="story-text"><h3>Mastering Off-Season Travel: How to Secure Five-Star Hotels at Peak-Season Prices</h3><p class="story-meta">Strategy &middot; 8 min read</p></div><div class="story-arrow">→</div></a>
+      <a href="/article/art-upgrade-business-class-economy-fares" class="story-item"><div class="story-img"><img src="/assets/art-upgrade-business-class-economy-fares.webp" alt="" loading="lazy"></div><div class="story-text"><h3>The Art of the Upgrade: Nailing Business Class Flights for Economy Fares</h3><p class="story-meta">Air Travel &middot; 6 min read</p></div><div class="story-arrow">→</div></a>
+      <a href="/article/hacking-hotel-loyalty-programs-elite-status-upgrades" class="story-item"><div class="story-img"><img src="/assets/hacking-hotel-loyalty-programs-elite-status-upgrades.webp" alt="" loading="lazy"></div><div class="story-text"><h3>Hacking Hotel Loyalty Programs: Earning Elite Status for Free Upgrades and Perks</h3><p class="story-meta">Hotels &middot; 7 min read</p></div><div class="story-arrow">→</div></a>
+      <a href="/article/dining-billionaire-michelin-starred-mid-range-budget" class="story-item"><div class="story-img"><img src="/assets/dining-billionaire-michelin-starred-mid-range-budget.webp" alt="" loading="lazy"></div><div class="story-text"><h3>Dining Like a Billionaire: Michelin-Starred Meals on a Mid-Range Budget</h3><p class="story-meta">Food &middot; 5 min read</p></div><div class="story-arrow">→</div></a>
+      <a href="/article/savvy-traveler-private-jet-charters-shared-empty-leg" class="story-item"><div class="story-img"><img src="/assets/savvy-traveler-private-jet-charters-shared-empty-leg.webp" alt="" loading="lazy"></div><div class="story-text"><h3>The Savvy Traveler's Guide to Private Jet Charters: Shared Flights & Empty Leg Deals</h3><p class="story-meta">Air Travel &middot; 6 min read</p></div><div class="story-arrow">→</div></a>
+      <a href="/article/beyond-tour-bus-private-drivers-guides" class="story-item"><div class="story-img"><img src="/assets/beyond-tour-bus-private-drivers-guides.webp" alt="" loading="lazy"></div><div class="story-text"><h3>Beyond the Tour Bus: Arranging Private Drivers & Guides for Experiential Luxury</h3><p class="story-meta">Experiences &middot; 5 min read</p></div><div class="story-arrow">→</div></a>
+      <a href="/article/securing-exclusive-access-private-estates-hidden-gardens" class="story-item"><div class="story-img"><img src="/assets/securing-exclusive-access-private-estates-hidden-gardens.webp" alt="" loading="lazy"></div><div class="story-text"><h3>Securing Exclusive Access: How to Visit Private Estates & Hidden Gardens Affordably</h3><p class="story-meta">Experiences &middot; 6 min read</p></div><div class="story-arrow">→</div></a>
+      <a href="/article/curating-bespoke-itinerary-diy-luxury-travel-planning-savings" class="story-item"><div class="story-img"><img src="/assets/curating-bespoke-itinerary-diy-luxury-travel-planning-savings.webp" alt="" loading="lazy"></div><div class="story-text"><h3>Curating a Bespoke Itinerary: DIY Luxury Travel Planning for Significant Savings</h3><p class="story-meta">Planning &middot; 7 min read</p></div><div class="story-arrow">→</div></a>
     </div>
   </div>
 </section>
 
-<!-- Newsletter CTA -->
-<div class="container">
-  <div class="cta-banner">
-    <h3>The Art of Luxury Travel</h3>
-    <p>Join discerning travelers who receive our curated guide to exceptional experiences at attainable prices.</p>
-    <a href="/contact" class="cta-btn">Stay Informed</a>
+<!-- CTA -->
+<div class="wrap">
+  <div class="cta-block">
+    <h3>Get the latest dispatches</h3>
+    <p>Stories from the road, delivered to your inbox. No spam, just good travel writing.</p>
+    <a href="/contact" class="cta-btn">Join the Journey</a>
   </div>
 </div>
 
-<!-- Section 3: Extraordinary Stays -->
-<section class="page-section-alt">
-  <div class="container">
-    <div class="section-header">
-      <p class="section-eyebrow">Where to Stay</p>
-      <h2 class="section-title">Extraordinary Stays</h2>
-      <p class="section-subtitle">Unique accommodations that redefine what a hotel can be</p>
-      <div class="gold-line"></div>
+<!-- Section: Extraordinary Stays -->
+<section class="section-alt">
+  <div class="wrap">
+    <div class="section-head">
+      <p class="section-tag">Shelter</p>
+      <h2 class="section-title">Beds worth writing home about</h2>
+      <p class="section-desc">Extraordinary places to rest your head</p>
     </div>
-    <div class="cards-grid-3">
-      <article class="card"><a href="/article/billionaire-retreat-worth-it-amangiri-zion-ponderosa"><div class="card-img"><img src="/assets/billionaire-retreat-worth-it-amangiri-zion-ponderosa.webp" alt="Billionaire Retreat" loading="lazy"></div></a><div class="card-body"><h3><a href="/article/billionaire-retreat-worth-it-amangiri-zion-ponderosa">Is That 'Billionaire Retreat' Worth It? A Candid Review of Amangiri vs. Zion Ponderosa</a></h3><a href="/article/billionaire-retreat-worth-it-amangiri-zion-ponderosa" class="read-more">Read <span class="arrow">&rarr;</span></a></div></article>
-      <article class="card"><a href="/article/private-island-dreams-maldives-four-seasons-palawan-eco-resort"><div class="card-img"><img src="/assets/private-island-dreams-maldives-four-seasons-palawan-eco-resort.webp" alt="Private Island Dreams" loading="lazy"></div></a><div class="card-body"><h3><a href="/article/private-island-dreams-maldives-four-seasons-palawan-eco-resort">Private Island Dreams: Comparing the Maldives' Four Seasons with a Palawan Eco-Resort</a></h3><a href="/article/private-island-dreams-maldives-four-seasons-palawan-eco-resort" class="read-more">Read <span class="arrow">&rarr;</span></a></div></article>
-      <article class="card"><a href="/article/castle-stays-ireland-scotland-royal-treatment-realistic-budget"><div class="card-img"><img src="/assets/castle-stays-ireland-scotland-royal-treatment-realistic-budget.webp" alt="Castle Stays" loading="lazy"></div></a><div class="card-body"><h3><a href="/article/castle-stays-ireland-scotland-royal-treatment-realistic-budget">Castle Stays in Ireland vs. Scotland: Finding Royal Treatment on a Realistic Budget</a></h3><a href="/article/castle-stays-ireland-scotland-royal-treatment-realistic-budget" class="read-more">Read <span class="arrow">&rarr;</span></a></div></article>
-      <article class="card"><a href="/article/private-island-rentals-caribbean-st-barts-belize-atolls"><div class="card-img"><img src="/assets/private-island-rentals-caribbean-st-barts-belize-atolls.webp" alt="Private Island Rentals" loading="lazy"></div></a><div class="card-body"><h3><a href="/article/private-island-rentals-caribbean-st-barts-belize-atolls">Private Island Rentals in the Caribbean: St. Barts vs. Belize's Atolls for Budget Luxury</a></h3><a href="/article/private-island-rentals-caribbean-st-barts-belize-atolls" class="read-more">Read <span class="arrow">&rarr;</span></a></div></article>
-      <article class="card"><a href="/article/luxury-homestays-airbnb-luxe-high-end-vacation-rental-agencies"><div class="card-img"><img src="/assets/luxury-homestays-airbnb-luxe-high-end-vacation-rental-agencies.webp" alt="Luxury Homestays" loading="lazy"></div></a><div class="card-body"><h3><a href="/article/luxury-homestays-airbnb-luxe-high-end-vacation-rental-agencies">Luxury Homestays: Airbnb Luxe vs. High-End Vacation Rental Agencies for Quality Control</a></h3><a href="/article/luxury-homestays-airbnb-luxe-high-end-vacation-rental-agencies" class="read-more">Read <span class="arrow">&rarr;</span></a></div></article>
-      <article class="card"><a href="/article/glamping-patagonia-high-end-domes-luxury-eco-lodges"><div class="card-img"><img src="/assets/glamping-patagonia-high-end-domes-luxury-eco-lodges.webp" alt="Glamping Patagonia" loading="lazy"></div></a><div class="card-body"><h3><a href="/article/glamping-patagonia-high-end-domes-luxury-eco-lodges">Glamping in Patagonia: High-End Domes vs. Luxury Eco-Lodges for Wilderness Comfort</a></h3><a href="/article/glamping-patagonia-high-end-domes-luxury-eco-lodges" class="read-more">Read <span class="arrow">&rarr;</span></a></div></article>
-      <article class="card"><a href="/article/luxury-desert-escapes-morocco-agafay-jordan-wadi-rum"><div class="card-img"><img src="/assets/luxury-desert-escapes-morocco-agafay-jordan-wadi-rum.webp" alt="Luxury Desert Escapes" loading="lazy"></div></a><div class="card-body"><h3><a href="/article/luxury-desert-escapes-morocco-agafay-jordan-wadi-rum">Luxury Desert Escapes: Morocco's Agafay Desert Glamping vs. Jordan's Wadi Rum Resorts</a></h3><a href="/article/luxury-desert-escapes-morocco-agafay-jordan-wadi-rum" class="read-more">Read <span class="arrow">&rarr;</span></a></div></article>
-      <article class="card"><a href="/article/beyond-first-class-chartering-private-yachts-villas-brokerage"><div class="card-img"><img src="/assets/beyond-first-class-chartering-private-yachts-villas-brokerage.webp" alt="Beyond First Class" loading="lazy"></div></a><div class="card-body"><h3><a href="/article/beyond-first-class-chartering-private-yachts-villas-brokerage">Beyond First Class: Chartering Private Yachts and Villas Through Smart Brokerage</a></h3><a href="/article/beyond-first-class-chartering-private-yachts-villas-brokerage" class="read-more">Read <span class="arrow">&rarr;</span></a></div></article>
-      <article class="card"><a href="/article/adventure-travel-antarctic-expeditions-arctic-circle-luxury-cruises"><div class="card-img"><img src="/assets/adventure-travel-antarctic-expeditions-arctic-circle-luxury-cruises.webp" alt="Adventure Travel" loading="lazy"></div></a><div class="card-body"><h3><a href="/article/adventure-travel-antarctic-expeditions-arctic-circle-luxury-cruises">Adventure Travel: Antarctic Expeditions vs. Arctic Circle Luxury Cruises</a></h3><a href="/article/adventure-travel-antarctic-expeditions-arctic-circle-luxury-cruises" class="read-more">Read <span class="arrow">&rarr;</span></a></div></article>
-    </div>
-  </div>
-</section>
-
-<!-- Section 4: Experiences -->
-<section class="page-section">
-  <div class="container">
-    <div class="section-header">
-      <p class="section-eyebrow">Once in a Lifetime</p>
-      <h2 class="section-title">Unforgettable Experiences</h2>
-      <p class="section-subtitle">Hand-picked journeys that elevate travel into art</p>
-      <div class="gold-line"></div>
-    </div>
-    <div class="cards-grid-2">
-      <article class="card-h"><a href="/article/safari-showdown-botswana-okavango-tanzania-serengeti"><div class="card-img"><img src="/assets/safari-showdown-botswana-okavango-tanzania-serengeti.webp" alt="Safari Showdown" loading="lazy"></div></a><div class="card-body"><h3><a href="/article/safari-showdown-botswana-okavango-tanzania-serengeti">The Safari Showdown: Botswana's Okavango vs. Tanzania's Serengeti for Affordable Opulence</a></h3><a href="/article/safari-showdown-botswana-okavango-tanzania-serengeti" class="read-more">Read <span class="arrow">&rarr;</span></a></div></article>
-      <article class="card-h"><a href="/article/yacht-charter-croatia-sailing-turkish-coast-adriatic-luxury"><div class="card-img"><img src="/assets/yacht-charter-croatia-sailing-turkish-coast-adriatic-luxury.webp" alt="Yacht Charter" loading="lazy"></div></a><div class="card-body"><h3><a href="/article/yacht-charter-croatia-sailing-turkish-coast-adriatic-luxury">Yacht Charter in Croatia vs. Sailing the Turkish Coast: Value for Adriatic Luxury</a></h3><a href="/article/yacht-charter-croatia-sailing-turkish-coast-adriatic-luxury" class="read-more">Read <span class="arrow">&rarr;</span></a></div></article>
-      <article class="card-h"><a href="/article/high-end-spa-retreats-thailand-wellness-bali-holistic"><div class="card-img"><img src="/assets/high-end-spa-retreats-thailand-wellness-bali-holistic.webp" alt="Spa Retreats" loading="lazy"></div></a><div class="card-body"><h3><a href="/article/high-end-spa-retreats-thailand-wellness-bali-holistic">High-End Spa Retreats: Thailand's Wellness Sanctuaries vs. Bali's Holistic Havens</a></h3><a href="/article/high-end-spa-retreats-thailand-wellness-bali-holistic" class="read-more">Read <span class="arrow">&rarr;</span></a></div></article>
-      <article class="card-h"><a href="/article/private-chef-michelin-restaurant-gourmet-experience-budget"><div class="card-img"><img src="/assets/private-chef-michelin-restaurant-gourmet-experience-budget.webp" alt="Private Chef vs Michelin" loading="lazy"></div></a><div class="card-body"><h3><a href="/article/private-chef-michelin-restaurant-gourmet-experience-budget">Private Chef vs. Michelin Restaurant: The Ultimate Gourmet Experience for Your Budget</a></h3><a href="/article/private-chef-michelin-restaurant-gourmet-experience-budget" class="read-more">Read <span class="arrow">&rarr;</span></a></div></article>
-      <article class="card-h"><a href="/article/european-river-cruises-uniworld-all-inclusive-boutique-local"><div class="card-img"><img src="/assets/european-river-cruises-uniworld-all-inclusive-boutique-local.webp" alt="River Cruises" loading="lazy"></div></a><div class="card-body"><h3><a href="/article/european-river-cruises-uniworld-all-inclusive-boutique-local">European River Cruises: Uniworld's All-Inclusive vs. Boutique Local Operators</a></h3><a href="/article/european-river-cruises-uniworld-all-inclusive-boutique-local" class="read-more">Read <span class="arrow">&rarr;</span></a></div></article>
-      <article class="card-h"><a href="/article/luxury-train-journeys-venice-simplon-orient-express-eastern-oriental-express"><div class="card-img"><img src="/assets/luxury-train-journeys-venice-simplon-orient-express-eastern-oriental-express.webp" alt="Luxury Train Journeys" loading="lazy"></div></a><div class="card-body"><h3><a href="/article/luxury-train-journeys-venice-simplon-orient-express-eastern-oriental-express">Luxury Train Journeys: The Venice Simplon-Orient-Express vs. Eastern &amp; Oriental Express</a></h3><a href="/article/luxury-train-journeys-venice-simplon-orient-express-eastern-oriental-express" class="read-more">Read <span class="arrow">&rarr;</span></a></div></article>
-      <article class="card-h"><a href="/article/wine-country-luxury-napa-valley-opulence-argentina-mendoza-value"><div class="card-img"><img src="/assets/wine-country-luxury-napa-valley-opulence-argentina-mendoza-value.webp" alt="Wine Country Luxury" loading="lazy"></div></a><div class="card-body"><h3><a href="/article/wine-country-luxury-napa-valley-opulence-argentina-mendoza-value">Wine Country Luxury: Napa Valley's Opulence vs. Argentina's Mendoza Value</a></h3><a href="/article/wine-country-luxury-napa-valley-opulence-argentina-mendoza-value" class="read-more">Read <span class="arrow">&rarr;</span></a></div></article>
-      <article class="card-h"><a href="/article/historical-city-luxury-romes-grand-hotels-istanbuls-boutique-palaces"><div class="card-img"><img src="/assets/historical-city-luxury-romes-grand-hotels-istanbuls-boutique-palaces.webp" alt="Historical City Luxury" loading="lazy"></div></a><div class="card-body"><h3><a href="/article/historical-city-luxury-romes-grand-hotels-istanbuls-boutique-palaces">Historical City Luxury: Rome's Grand Hotels vs. Istanbul's Boutique Palaces</a></h3><a href="/article/historical-city-luxury-romes-grand-hotels-istanbuls-boutique-palaces" class="read-more">Read <span class="arrow">&rarr;</span></a></div></article>
-      <article class="card-h"><a href="/article/wellness-retreats-tuscan-hot-springs-hungarian-thermal-baths"><div class="card-img"><img src="/assets/wellness-retreats-tuscan-hot-springs-hungarian-thermal-baths.webp" alt="Wellness Retreats" loading="lazy"></div></a><div class="card-body"><h3><a href="/article/wellness-retreats-tuscan-hot-springs-hungarian-thermal-baths">Wellness Retreats: Tuscan Hot Springs Resorts vs. Hungarian Thermal Baths Luxury</a></h3><a href="/article/wellness-retreats-tuscan-hot-springs-hungarian-thermal-baths" class="read-more">Read <span class="arrow">&rarr;</span></a></div></article>
-      <article class="card-h"><a href="/article/worlds-best-infinity-pools-million-dollar-views-fraction-cost"><div class="card-img"><img src="/assets/worlds-best-infinity-pools-million-dollar-views-fraction-cost.webp" alt="Infinity Pools" loading="lazy"></div></a><div class="card-body"><h3><a href="/article/worlds-best-infinity-pools-million-dollar-views-fraction-cost">The World's Best Infinity Pools: Finding Million-Dollar Views for a Fraction of the Cost</a></h3><a href="/article/worlds-best-infinity-pools-million-dollar-views-fraction-cost" class="read-more">Read <span class="arrow">&rarr;</span></a></div></article>
+    <div class="card-grid">
+      <article class="card"><a href="/article/billionaire-retreat-worth-it-amangiri-zion-ponderosa"><div class="card-img-wrap"><img src="/assets/billionaire-retreat-worth-it-amangiri-zion-ponderosa.webp" alt="" loading="lazy"></div></a><div class="card-text"><h3><a href="/article/billionaire-retreat-worth-it-amangiri-zion-ponderosa">Is That 'Billionaire Retreat' Worth It? Amangiri vs. Zion Ponderosa</a></h3><a href="/article/billionaire-retreat-worth-it-amangiri-zion-ponderosa" class="card-link">Read <span>→</span></a></div></article>
+      <article class="card"><a href="/article/private-island-dreams-maldives-four-seasons-palawan-eco-resort"><div class="card-img-wrap"><img src="/assets/private-island-dreams-maldives-four-seasons-palawan-eco-resort.webp" alt="" loading="lazy"></div></a><div class="card-text"><h3><a href="/article/private-island-dreams-maldives-four-seasons-palawan-eco-resort">Private Island Dreams: Maldives' Four Seasons vs. Palawan Eco-Resort</a></h3><a href="/article/private-island-dreams-maldives-four-seasons-palawan-eco-resort" class="card-link">Read <span>→</span></a></div></article>
+      <article class="card"><a href="/article/castle-stays-ireland-scotland-royal-treatment-realistic-budget"><div class="card-img-wrap"><img src="/assets/castle-stays-ireland-scotland-royal-treatment-realistic-budget.webp" alt="" loading="lazy"></div></a><div class="card-text"><h3><a href="/article/castle-stays-ireland-scotland-royal-treatment-realistic-budget">Castle Stays: Ireland vs. Scotland for Royal Treatment on a Realistic Budget</a></h3><a href="/article/castle-stays-ireland-scotland-royal-treatment-realistic-budget" class="card-link">Read <span>→</span></a></div></article>
+      <article class="card"><a href="/article/private-island-rentals-caribbean-st-barts-belize-atolls"><div class="card-img-wrap"><img src="/assets/private-island-rentals-caribbean-st-barts-belize-atolls.webp" alt="" loading="lazy"></div></a><div class="card-text"><h3><a href="/article/private-island-rentals-caribbean-st-barts-belize-atolls">Private Island Rentals: St. Barts vs. Belize's Atolls for Budget Luxury</a></h3><a href="/article/private-island-rentals-caribbean-st-barts-belize-atolls" class="card-link">Read <span>→</span></a></div></article>
+      <article class="card"><a href="/article/luxury-homestays-airbnb-luxe-high-end-vacation-rental-agencies"><div class="card-img-wrap"><img src="/assets/luxury-homestays-airbnb-luxe-high-end-vacation-rental-agencies.webp" alt="" loading="lazy"></div></a><div class="card-text"><h3><a href="/article/luxury-homestays-airbnb-luxe-high-end-vacation-rental-agencies">Luxury Homestays: Airbnb Luxe vs. High-End Vacation Rental Agencies</a></h3><a href="/article/luxury-homestays-airbnb-luxe-high-end-vacation-rental-agencies" class="card-link">Read <span>→</span></a></div></article>
+      <article class="card"><a href="/article/glamping-patagonia-high-end-domes-luxury-eco-lodges"><div class="card-img-wrap"><img src="/assets/glamping-patagonia-high-end-domes-luxury-eco-lodges.webp" alt="" loading="lazy"></div></a><div class="card-text"><h3><a href="/article/glamping-patagonia-high-end-domes-luxury-eco-lodges">Glamping in Patagonia: High-End Domes vs. Luxury Eco-Lodges</a></h3><a href="/article/glamping-patagonia-high-end-domes-luxury-eco-lodges" class="card-link">Read <span>→</span></a></div></article>
+      <article class="card"><a href="/article/luxury-desert-escapes-morocco-agafay-jordan-wadi-rum"><div class="card-img-wrap"><img src="/assets/luxury-desert-escapes-morocco-agafay-jordan-wadi-rum.webp" alt="" loading="lazy"></div></a><div class="card-text"><h3><a href="/article/luxury-desert-escapes-morocco-agafay-jordan-wadi-rum">Luxury Desert Escapes: Morocco's Agafay vs. Jordan's Wadi Rum Resorts</a></h3><a href="/article/luxury-desert-escapes-morocco-agafay-jordan-wadi-rum" class="card-link">Read <span>→</span></a></div></article>
+      <article class="card"><a href="/article/beyond-first-class-chartering-private-yachts-villas-brokerage"><div class="card-img-wrap"><img src="/assets/beyond-first-class-chartering-private-yachts-villas-brokerage.webp" alt="" loading="lazy"></div></a><div class="card-text"><h3><a href="/article/beyond-first-class-chartering-private-yachts-villas-brokerage">Beyond First Class: Chartering Private Yachts and Villas Through Smart Brokerage</a></h3><a href="/article/beyond-first-class-chartering-private-yachts-villas-brokerage" class="card-link">Read <span>→</span></a></div></article>
+      <article class="card"><a href="/article/adventure-travel-antarctic-expeditions-arctic-circle-luxury-cruises"><div class="card-img-wrap"><img src="/assets/adventure-travel-antarctic-expeditions-arctic-circle-luxury-cruises.webp" alt="" loading="lazy"></div></a><div class="card-text"><h3><a href="/article/adventure-travel-antarctic-expeditions-arctic-circle-luxury-cruises">Adventure Travel: Antarctic Expeditions vs. Arctic Circle Luxury Cruises</a></h3><a href="/article/adventure-travel-antarctic-expeditions-arctic-circle-luxury-cruises" class="card-link">Read <span>→</span></a></div></article>
     </div>
   </div>
 </section>
 
-<!-- Section 5: Hotel Luxe -->
-<section class="page-section-alt">
-  <div class="container">
-    <div class="section-header">
-      <p class="section-eyebrow">The Finer Things</p>
-      <h2 class="section-title">Hotel Luxe</h2>
-      <p class="section-subtitle">The amenities and details that transform a stay into an experience</p>
-      <div class="gold-line"></div>
+<!-- Section: Experiences + remaining articles (mixed grid, 2 columns) -->
+<section class="section">
+  <div class="wrap">
+    <div class="section-head">
+      <p class="section-tag">Encounters</p>
+      <h2 class="section-title">Moments that matter</h2>
+      <p class="section-desc">The experiences that stay with you long after the suitcase is unpacked</p>
     </div>
-    <div class="cards-grid">
-      <article class="card"><a href="/article/boutique-hotel-bathrooms-spa-level-indulgence-mid-range"><div class="card-img"><img src="/assets/boutique-hotel-bathrooms-spa-level-indulgence-mid-range.webp" alt="Boutique Bathrooms" loading="lazy"></div></a><div class="card-body"><h3><a href="/article/boutique-hotel-bathrooms-spa-level-indulgence-mid-range">Boutique Hotel Bathrooms: Finding Spa-Level Indulgence in Mid-Range Stays</a></h3><a href="/article/boutique-hotel-bathrooms-spa-level-indulgence-mid-range" class="read-more">Read <span class="arrow">&rarr;</span></a></div></article>
-      <article class="card"><a href="/article/best-hotel-beds-five-star-sleep-less"><div class="card-img"><img src="/assets/best-hotel-beds-five-star-sleep-less.webp" alt="Best Hotel Beds" loading="lazy"></div></a><div class="card-body"><h3><a href="/article/best-hotel-beds-five-star-sleep-less">The Best Hotel Beds: Where to Find Five-Star Sleep for Less</a></h3><a href="/article/best-hotel-beds-five-star-sleep-less" class="read-more">Read <span class="arrow">&rarr;</span></a></div></article>
-      <article class="card"><a href="/article/private-airport-transfers-arriving-style-chauffeur-price"><div class="card-img"><img src="/assets/private-airport-transfers-arriving-style-chauffeur-price.webp" alt="Airport Transfers" loading="lazy"></div></a><div class="card-body"><h3><a href="/article/private-airport-transfers-arriving-style-chauffeur-price">Private Airport Transfers: Arriving in Style Without the Chauffeur Price Tag</a></h3><a href="/article/private-airport-transfers-arriving-style-chauffeur-price" class="read-more">Read <span class="arrow">&rarr;</span></a></div></article>
-      <article class="card"><a href="/article/hotels-complimentary-butler-service-elite-amenities-budget"><div class="card-img"><img src="/assets/hotels-complimentary-butler-service-elite-amenities-budget.webp" alt="Butler Service" loading="lazy"></div></a><div class="card-body"><h3><a href="/article/hotels-complimentary-butler-service-elite-amenities-budget">Hotels with Complimentary Butler Service: Unlocking Elite Amenities on a Budget</a></h3><a href="/article/hotels-complimentary-butler-service-elite-amenities-budget" class="read-more">Read <span class="arrow">&rarr;</span></a></div></article>
-      <article class="card"><a href="/article/gourmet-breakfasts-included-hotels-elevate-morning-meal"><div class="card-img"><img src="/assets/gourmet-breakfasts-included-hotels-elevate-morning-meal.webp" alt="Gourmet Breakfasts" loading="lazy"></div></a><div class="card-body"><h3><a href="/article/gourmet-breakfasts-included-hotels-elevate-morning-meal">Gourmet Breakfasts Included: Hotels That Elevate Your Morning Meal to an Experience</a></h3><a href="/article/gourmet-breakfasts-included-hotels-elevate-morning-meal" class="read-more">Read <span class="arrow">&rarr;</span></a></div></article>
-      <article class="card"><a href="/article/hotels-private-plunge-pools-personal-oasis-less"><div class="card-img"><img src="/assets/hotels-private-plunge-pools-personal-oasis-less.webp" alt="Private Plunge Pools" loading="lazy"></div></a><div class="card-body"><h3><a href="/article/hotels-private-plunge-pools-personal-oasis-less">Hotels with Private Plunge Pools: Your Personal Oasis for Less Than a Resort Suite</a></h3><a href="/article/hotels-private-plunge-pools-personal-oasis-less" class="read-more">Read <span class="arrow">&rarr;</span></a></div></article>
-      <article class="card"><a href="/article/best-hotel-amenities-pillow-menus-personal-shopping"><div class="card-img"><img src="/assets/best-hotel-amenities-pillow-menus-personal-shopping.webp" alt="Best Hotel Amenities" loading="lazy"></div></a><div class="card-body"><h3><a href="/article/best-hotel-amenities-pillow-menus-personal-shopping">The Best Hotel Amenities You Never Knew Existed: From Pillow Menus to Personal Shopping</a></h3><a href="/article/best-hotel-amenities-pillow-menus-personal-shopping" class="read-more">Read <span class="arrow">&rarr;</span></a></div></article>
-      <article class="card"><a href="/article/exclusive-club-lounge-access-free-drinks-snacks-business-centers"><div class="card-img"><img src="/assets/exclusive-club-lounge-access-free-drinks-snacks-business-centers.webp" alt="Club Lounge Access" loading="lazy"></div></a><div class="card-body"><h3><a href="/article/exclusive-club-lounge-access-free-drinks-snacks-business-centers">Exclusive Club Lounge Access: Unlocking Free Drinks, Snacks &amp; Business Centers</a></h3><a href="/article/exclusive-club-lounge-access-free-drinks-snacks-business-centers" class="read-more">Read <span class="arrow">&rarr;</span></a></div></article>
-      <article class="card"><a href="/article/hotels-private-onsen-hot-tubs-japanese-luxury"><div class="card-img"><img src="/assets/hotels-private-onsen-hot-tubs-japanese-luxury.webp" alt="Private Onsen" loading="lazy"></div></a><div class="card-body"><h3><a href="/article/hotels-private-onsen-hot-tubs-japanese-luxury">Hotels with Private Onsen/Hot Tubs: Your Personal Thermal Retreat for Japanese Luxury</a></h3><a href="/article/hotels-private-onsen-hot-tubs-japanese-luxury" class="read-more">Read <span class="arrow">&rarr;</span></a></div></article>
-      <article class="card"><a href="/article/best-hotel-soundproofing-peaceful-billionaire-sleep"><div class="card-img"><img src="/assets/best-hotel-soundproofing-peaceful-billionaire-sleep.webp" alt="Hotel Soundproofing" loading="lazy"></div></a><div class="card-body"><h3><a href="/article/best-hotel-soundproofing-peaceful-billionaire-sleep">The Best Hotel Soundproofing: Ensuring a Peaceful, Billionaire-Level Sleep</a></h3><a href="/article/best-hotel-soundproofing-peaceful-billionaire-sleep" class="read-more">Read <span class="arrow">&rarr;</span></a></div></article>
-      <article class="card"><a href="/article/hotels-free-luxury-car-use-drive-style-no-extra-cost"><div class="card-img"><img src="/assets/hotels-free-luxury-car-use-drive-style-no-extra-cost.webp" alt="Free Luxury Car Use" loading="lazy"></div></a><div class="card-body"><h3><a href="/article/hotels-free-luxury-car-use-drive-style-no-extra-cost">Hotels That Offer Free Luxury Car Use: Drive in Style for No Extra Cost</a></h3><a href="/article/hotels-free-luxury-car-use-drive-style-no-extra-cost" class="read-more">Read <span class="arrow">&rarr;</span></a></div></article>
-      <article class="card"><a href="/article/beyond-mini-bar-hotels-gourmet-pantries-complimentary-snacks"><div class="card-img"><img src="/assets/beyond-mini-bar-hotels-gourmet-pantries-complimentary-snacks.webp" alt="Beyond Mini-Bar" loading="lazy"></div></a><div class="card-body"><h3><a href="/article/beyond-mini-bar-hotels-gourmet-pantries-complimentary-snacks">Beyond the Mini-Bar: Hotels with Gourmet Pantries &amp; Complimentary Snacks</a></h3><a href="/article/beyond-mini-bar-hotels-gourmet-pantries-complimentary-snacks" class="read-more">Read <span class="arrow">&rarr;</span></a></div></article>
-      <article class="card"><a href="/article/hotels-rooftop-bars-pools-million-dollar-city-views-budget"><div class="card-img"><img src="/assets/hotels-rooftop-bars-pools-million-dollar-city-views-budget.webp" alt="Rooftop Bars &amp; Pools" loading="lazy"></div></a><div class="card-body"><h3><a href="/article/hotels-rooftop-bars-pools-million-dollar-city-views-budget">Hotels with Rooftop Bars &amp; Pools: Million-Dollar City Views on a Budget</a></h3><a href="/article/hotels-rooftop-bars-pools-million-dollar-city-views-budget" class="read-more">Read <span class="arrow">&rarr;</span></a></div></article>
-      <article class="card"><a href="/article/personalized-welcome-amenities-hotels-beyond-standard-wine"><div class="card-img"><img src="/assets/personalized-welcome-amenities-hotels-beyond-standard-wine.webp" alt="Welcome Amenities" loading="lazy"></div></a><div class="card-body"><h3><a href="/article/personalized-welcome-amenities-hotels-beyond-standard-wine">Personalized Welcome Amenities: Hotels That Go Beyond the Standard Bottle of Wine</a></h3><a href="/article/personalized-welcome-amenities-hotels-beyond-standard-wine" class="read-more">Read <span class="arrow">&rarr;</span></a></div></article>
-      <article class="card"><a href="/article/hotels-top-tier-gyms-wellness-facilities-luxury"><div class="card-img"><img src="/assets/hotels-top-tier-gyms-wellness-facilities-luxury.webp" alt="Top-Tier Gyms" loading="lazy"></div></a><div class="card-body"><h3><a href="/article/hotels-top-tier-gyms-wellness-facilities-luxury">Hotels with Top-Tier Gyms &amp; Wellness Facilities: Maintaining Your Routine in Luxury</a></h3><a href="/article/hotels-top-tier-gyms-wellness-facilities-luxury" class="read-more">Read <span class="arrow">&rarr;</span></a></div></article>
-      <article class="card"><a href="/article/best-hotel-concierge-services-unlocking-hidden-gems-vip-experiences"><div class="card-img"><img src="/assets/best-hotel-concierge-services-unlocking-hidden-gems-vip-experiences.webp" alt="Best Concierge Services" loading="lazy"></div></a><div class="card-body"><h3><a href="/article/best-hotel-concierge-services-unlocking-hidden-gems-vip-experiences">The Best Hotel Concierge Services: Unlocking Hidden Gems &amp; VIP Experiences</a></h3><a href="/article/best-hotel-concierge-services-unlocking-hidden-gems-vip-experiences" class="read-more">Read <span class="arrow">&rarr;</span></a></div></article>
-      <article class="card"><a href="/article/hotels-private-beach-access-secluded-sands-five-star-service"><div class="card-img"><img src="/assets/hotels-private-beach-access-secluded-sands-five-star-service.webp" alt="Private Beach Access" loading="lazy"></div></a><div class="card-body"><h3><a href="/article/hotels-private-beach-access-secluded-sands-five-star-service">Hotels with Private Beach Access: Secluded Sands &amp; Five-Star Service for Less</a></h3><a href="/article/hotels-private-beach-access-secluded-sands-five-star-service" class="read-more">Read <span class="arrow">&rarr;</span></a></div></article>
-      <article class="card"><a href="/article/most-luxurious-hotel-linens-egyptian-cotton-silk"><div class="card-img"><img src="/assets/most-luxurious-hotel-linens-egyptian-cotton-silk.webp" alt="Luxurious Hotel Linens" loading="lazy"></div></a><div class="card-body"><h3><a href="/article/most-luxurious-hotel-linens-egyptian-cotton-silk">The Most Luxurious Hotel Linens: Where to Find Egyptian Cotton &amp; Silk for Ultimate Comfort</a></h3><a href="/article/most-luxurious-hotel-linens-egyptian-cotton-silk" class="read-more">Read <span class="arrow">&rarr;</span></a></div></article>
+    <div class="card-grid-2col">
+      <article class="card"><a href="/article/safari-showdown-botswana-okavango-tanzania-serengeti"><div class="card-img-wrap"><img src="/assets/safari-showdown-botswana-okavango-tanzania-serengeti.webp" alt="" loading="lazy"></div></a><div class="card-text"><h3><a href="/article/safari-showdown-botswana-okavango-tanzania-serengeti">The Safari Showdown: Botswana's Okavango vs. Tanzania's Serengeti</a></h3><a href="/article/safari-showdown-botswana-okavango-tanzania-serengeti" class="card-link">Read <span>→</span></a></div></article>
+      <article class="card"><a href="/article/yacht-charter-croatia-sailing-turkish-coast-adriatic-luxury"><div class="card-img-wrap"><img src="/assets/yacht-charter-croatia-sailing-turkish-coast-adriatic-luxury.webp" alt="" loading="lazy"></div></a><div class="card-text"><h3><a href="/article/yacht-charter-croatia-sailing-turkish-coast-adriatic-luxury">Yacht Charter in Croatia vs. Sailing the Turkish Coast</a></h3><a href="/article/yacht-charter-croatia-sailing-turkish-coast-adriatic-luxury" class="card-link">Read <span>→</span></a></div></article>
+      <article class="card"><a href="/article/high-end-spa-retreats-thailand-wellness-bali-holistic"><div class="card-img-wrap"><img src="/assets/high-end-spa-retreats-thailand-wellness-bali-holistic.webp" alt="" loading="lazy"></div></a><div class="card-text"><h3><a href="/article/high-end-spa-retreats-thailand-wellness-bali-holistic">High-End Spa Retreats: Thailand's Wellness Sanctuaries vs. Bali's Holistic Havens</a></h3><a href="/article/high-end-spa-retreats-thailand-wellness-bali-holistic" class="card-link">Read <span>→</span></a></div></article>
+      <article class="card"><a href="/article/private-chef-michelin-restaurant-gourmet-experience-budget"><div class="card-img-wrap"><img src="/assets/private-chef-michelin-restaurant-gourmet-experience-budget.webp" alt="" loading="lazy"></div></a><div class="card-text"><h3><a href="/article/private-chef-michelin-restaurant-gourmet-experience-budget">Private Chef vs. Michelin Restaurant: The Ultimate Gourmet Experience for Your Budget</a></h3><a href="/article/private-chef-michelin-restaurant-gourmet-experience-budget" class="card-link">Read <span>→</span></a></div></article>
+      <article class="card"><a href="/article/european-river-cruises-uniworld-all-inclusive-boutique-local"><div class="card-img-wrap"><img src="/assets/european-river-cruises-uniworld-all-inclusive-boutique-local.webp" alt="" loading="lazy"></div></a><div class="card-text"><h3><a href="/article/european-river-cruises-uniworld-all-inclusive-boutique-local">European River Cruises: Uniworld's All-Inclusive vs. Boutique Local Operators</a></h3><a href="/article/european-river-cruises-uniworld-all-inclusive-boutique-local" class="card-link">Read <span>→</span></a></div></article>
+      <article class="card"><a href="/article/luxury-train-journeys-venice-simplon-orient-express-eastern-oriental-express"><div class="card-img-wrap"><img src="/assets/luxury-train-journeys-venice-simplon-orient-express-eastern-oriental-express.webp" alt="" loading="lazy"></div></a><div class="card-text"><h3><a href="/article/luxury-train-journeys-venice-simplon-orient-express-eastern-oriental-express">Luxury Train Journeys: Venice Simplon-Orient-Express vs. Eastern & Oriental Express</a></h3><a href="/article/luxury-train-journeys-venice-simplon-orient-express-eastern-oriental-express" class="card-link">Read <span>→</span></a></div></article>
+      <article class="card"><a href="/article/wine-country-luxury-napa-valley-opulence-argentina-mendoza-value"><div class="card-img-wrap"><img src="/assets/wine-country-luxury-napa-valley-opulence-argentina-mendoza-value.webp" alt="" loading="lazy"></div></a><div class="card-text"><h3><a href="/article/wine-country-luxury-napa-valley-opulence-argentina-mendoza-value">Wine Country Luxury: Napa Valley's Opulence vs. Argentina's Mendoza Value</a></h3><a href="/article/wine-country-luxury-napa-valley-opulence-argentina-mendoza-value" class="card-link">Read <span>→</span></a></div></article>
+      <article class="card"><a href="/article/historical-city-luxury-romes-grand-hotels-istanbuls-boutique-palaces"><div class="card-img-wrap"><img src="/assets/historical-city-luxury-romes-grand-hotels-istanbuls-boutique-palaces.webp" alt="" loading="lazy"></div></a><div class="card-text"><h3><a href="/article/historical-city-luxury-romes-grand-hotels-istanbuls-boutique-palaces">Historical City Luxury: Rome's Grand Hotels vs. Istanbul's Boutique Palaces</a></h3><a href="/article/historical-city-luxury-romes-grand-hotels-istanbuls-boutique-palaces" class="card-link">Read <span>→</span></a></div></article>
+      <article class="card"><a href="/article/wellness-retreats-tuscan-hot-springs-hungarian-thermal-baths"><div class="card-img-wrap"><img src="/assets/wellness-retreats-tuscan-hot-springs-hungarian-thermal-baths.webp" alt="" loading="lazy"></div></a><div class="card-text"><h3><a href="/article/wellness-retreats-tuscan-hot-springs-hungarian-thermal-baths">Wellness Retreats: Tuscan Hot Springs Resorts vs. Hungarian Thermal Baths Luxury</a></h3><a href="/article/wellness-retreats-tuscan-hot-springs-hungarian-thermal-baths" class="card-link">Read <span>→</span></a></div></article>
+      <article class="card"><a href="/article/worlds-best-infinity-pools-million-dollar-views-fraction-cost"><div class="card-img-wrap"><img src="/assets/worlds-best-infinity-pools-million-dollar-views-fraction-cost.webp" alt="" loading="lazy"></div></a><div class="card-text"><h3><a href="/article/worlds-best-infinity-pools-million-dollar-views-fraction-cost">The World's Best Infinity Pools: Million-Dollar Views for a Fraction of the Cost</a></h3><a href="/article/worlds-best-infinity-pools-million-dollar-views-fraction-cost" class="card-link">Read <span>→</span></a></div></article>
+      <article class="card"><a href="/article/private-in-villa-chefs-ultimate-luxury-dining-experience-afford"><div class="card-img-wrap"><img src="/assets/private-in-villa-chefs-ultimate-luxury-dining-experience-afford.webp" alt="" loading="lazy"></div></a><div class="card-text"><h3><a href="/article/private-in-villa-chefs-ultimate-luxury-dining-experience-afford">Private In-Villa Chefs: The Ultimate Luxury Dining Experience You Can Afford</a></h3><a href="/article/private-in-villa-chefs-ultimate-luxury-dining-experience-afford" class="card-link">Read <span>→</span></a></div></article>
+    </div>
+  </div>
+</section>
+
+<!-- Section: Quick reads (remaining articles in compact grid) -->
+<section class="section-alt">
+  <div class="wrap">
+    <div class="section-head center">
+      <p class="section-tag">The Details</p>
+      <h2 class="section-title">Hotel Luxe, Unpacked</h2>
+      <p class="section-desc">The little things that make a big difference</p>
+    </div>
+    <div class="card-grid">
+      <article class="card"><a href="/article/private-villa-luxury-hotel-maximum-value"><div class="card-img-wrap"><img src="/assets/private-villa-luxury-hotel-maximum-value.webp" alt="" loading="lazy"></div></a><div class="card-text"><h3><a href="/article/private-villa-luxury-hotel-maximum-value">Private Villa vs. Luxury Hotel: When to Choose Each for Maximum Value</a></h3><a href="/article/private-villa-luxury-hotel-maximum-value" class="card-link">Read <span>→</span></a></div></article>
+      <article class="card"><a href="/article/maximizing-travel-credit-card-perks-lounge-access-hotel-credits"><div class="card-img-wrap"><img src="/assets/maximizing-travel-credit-card-perks-lounge-access-hotel-credits.webp" alt="" loading="lazy"></div></a><div class="card-text"><h3><a href="/article/maximizing-travel-credit-card-perks-lounge-access-hotel-credits">Maximizing Travel Credit Card Perks: Free Lounge Access & Hotel Credits</a></h3><a href="/article/maximizing-travel-credit-card-perks-lounge-access-hotel-credits" class="card-link">Read <span>→</span></a></div></article>
+      <article class="card"><a href="/article/art-negotiation-room-upgrades-late-checkouts-free"><div class="card-img-wrap"><img src="/assets/art-negotiation-room-upgrades-late-checkouts-free.webp" alt="" loading="lazy"></div></a><div class="card-text"><h3><a href="/article/art-negotiation-room-upgrades-late-checkouts-free">The Art of Negotiation: Getting Room Upgrades and Late Checkouts for Free</a></h3><a href="/article/art-negotiation-room-upgrades-late-checkouts-free" class="card-link">Read <span>→</span></a></div></article>
+      <article class="card"><a href="/article/renting-luxury-cars-less-exotic-drives-budget"><div class="card-img-wrap"><img src="/assets/renting-luxury-cars-less-exotic-drives-budget.webp" alt="" loading="lazy"></div></a><div class="card-text"><h3><a href="/article/renting-luxury-cars-less-exotic-drives-budget">Renting Luxury Cars for Less: Exotic Drives on a Budget</a></h3><a href="/article/renting-luxury-cars-less-exotic-drives-budget" class="card-link">Read <span>→</span></a></div></article>
+      <article class="card"><a href="/article/concierge-services-budget-vip-treatment"><div class="card-img-wrap"><img src="/assets/concierge-services-budget-vip-treatment.webp" alt="" loading="lazy"></div></a><div class="card-text"><h3><a href="/article/concierge-services-budget-vip-treatment">Concierge Services on a Budget: How to Get VIP Treatment Without the Price Tag</a></h3><a href="/article/concierge-services-budget-vip-treatment" class="card-link">Read <span>→</span></a></div></article>
+      <article class="card"><a href="/article/best-hotel-beds-five-star-sleep-less"><div class="card-img-wrap"><img src="/assets/best-hotel-beds-five-star-sleep-less.webp" alt="" loading="lazy"></div></a><div class="card-text"><h3><a href="/article/best-hotel-beds-five-star-sleep-less">The Best Hotel Beds: Where to Find Five-Star Sleep for Less</a></h3><a href="/article/best-hotel-beds-five-star-sleep-less" class="card-link">Read <span>→</span></a></div></article>
+      <article class="card"><a href="/article/hotels-complimentary-butler-service-elite-amenities-budget"><div class="card-img-wrap"><img src="/assets/hotels-complimentary-butler-service-elite-amenities-budget.webp" alt="" loading="lazy"></div></a><div class="card-text"><h3><a href="/article/hotels-complimentary-butler-service-elite-amenities-budget">Hotels with Complimentary Butler Service: Unlocking Elite Amenities on a Budget</a></h3><a href="/article/hotels-complimentary-butler-service-elite-amenities-budget" class="card-link">Read <span>→</span></a></div></article>
+      <article class="card"><a href="/article/hotels-private-plunge-pools-personal-oasis-less"><div class="card-img-wrap"><img src="/assets/hotels-private-plunge-pools-personal-oasis-less.webp" alt="" loading="lazy"></div></a><div class="card-text"><h3><a href="/article/hotels-private-plunge-pools-personal-oasis-less">Hotels with Private Plunge Pools: Your Personal Oasis for Less Than a Resort Suite</a></h3><a href="/article/hotels-private-plunge-pools-personal-oasis-less" class="card-link">Read <span>→</span></a></div></article>
+      <article class="card"><a href="/article/hotels-rooftop-bars-pools-million-dollar-city-views-budget"><div class="card-img-wrap"><img src="/assets/hotels-rooftop-bars-pools-million-dollar-city-views-budget.webp" alt="" loading="lazy"></div></a><div class="card-text"><h3><a href="/article/hotels-rooftop-bars-pools-million-dollar-city-views-budget">Hotels with Rooftop Bars & Pools: Million-Dollar City Views on a Budget</a></h3><a href="/article/hotels-rooftop-bars-pools-million-dollar-city-views-budget" class="card-link">Read <span>→</span></a></div></article>
+      <article class="card"><a href="/article/hotels-private-beach-access-secluded-sands-five-star-service"><div class="card-img-wrap"><img src="/assets/hotels-private-beach-access-secluded-sands-five-star-service.webp" alt="" loading="lazy"></div></a><div class="card-text"><h3><a href="/article/hotels-private-beach-access-secluded-sands-five-star-service">Hotels with Private Beach Access: Secluded Sands & Five-Star Service for Less</a></h3><a href="/article/hotels-private-beach-access-secluded-sands-five-star-service" class="card-link">Read <span>→</span></a></div></article>
+      <article class="card"><a href="/article/most-luxurious-hotel-linens-egyptian-cotton-silk"><div class="card-img-wrap"><img src="/assets/most-luxurious-hotel-linens-egyptian-cotton-silk.webp" alt="" loading="lazy"></div></a><div class="card-text"><h3><a href="/article/most-luxurious-hotel-linens-egyptian-cotton-silk">The Most Luxurious Hotel Linens: Where to Find Egyptian Cotton & Silk for Ultimate Comfort</a></h3><a href="/article/most-luxurious-hotel-linens-egyptian-cotton-silk" class="card-link">Read <span>→</span></a></div></article>
+      <article class="card"><a href="/article/personalized-welcome-amenities-hotels-beyond-standard-wine"><div class="card-img-wrap"><img src="/assets/personalized-welcome-amenities-hotels-beyond-standard-wine.webp" alt="" loading="lazy"></div></a><div class="card-text"><h3><a href="/article/personalized-welcome-amenities-hotels-beyond-standard-wine">Personalized Welcome Amenities: Hotels That Go Beyond the Standard Bottle of Wine</a></h3><a href="/article/personalized-welcome-amenities-hotels-beyond-standard-wine" class="card-link">Read <span>→</span></a></div></article>
+      <article class="card"><a href="/article/hotels-top-tier-gyms-wellness-facilities-luxury"><div class="card-img-wrap"><img src="/assets/hotels-top-tier-gyms-wellness-facilities-luxury.webp" alt="" loading="lazy"></div></a><div class="card-text"><h3><a href="/article/hotels-top-tier-gyms-wellness-facilities-luxury">Hotels with Top-Tier Gyms & Wellness Facilities: Maintaining Your Routine in Luxury</a></h3><a href="/article/hotels-top-tier-gyms-wellness-facilities-luxury" class="card-link">Read <span>→</span></a></div></article>
+      <article class="card"><a href="/article/best-hotel-concierge-services-unlocking-hidden-gems-vip-experiences"><div class="card-img-wrap"><img src="/assets/best-hotel-concierge-services-unlocking-hidden-gems-vip-experiences.webp" alt="" loading="lazy"></div></a><div class="card-text"><h3><a href="/article/best-hotel-concierge-services-unlocking-hidden-gems-vip-experiences">The Best Hotel Concierge Services: Unlocking Hidden Gems & VIP Experiences</a></h3><a href="/article/best-hotel-concierge-services-unlocking-hidden-gems-vip-experiences" class="card-link">Read <span>→</span></a></div></article>
+      <article class="card"><a href="/article/boutique-hotel-bathrooms-spa-level-indulgence-mid-range"><div class="card-img-wrap"><img src="/assets/boutique-hotel-bathrooms-spa-level-indulgence-mid-range.webp" alt="" loading="lazy"></div></a><div class="card-text"><h3><a href="/article/boutique-hotel-bathrooms-spa-level-indulgence-mid-range">Boutique Hotel Bathrooms: Finding Spa-Level Indulgence in Mid-Range Stays</a></h3><a href="/article/boutique-hotel-bathrooms-spa-level-indulgence-mid-range" class="card-link">Read <span>→</span></a></div></article>
+      <article class="card"><a href="/article/private-airport-transfers-arriving-style-chauffeur-price"><div class="card-img-wrap"><img src="/assets/private-airport-transfers-arriving-style-chauffeur-price.webp" alt="" loading="lazy"></div></a><div class="card-text"><h3><a href="/article/private-airport-transfers-arriving-style-chauffeur-price">Private Airport Transfers: Arriving in Style Without the Chauffeur Price Tag</a></h3><a href="/article/private-airport-transfers-arriving-style-chauffeur-price" class="card-link">Read <span>→</span></a></div></article>
+      <article class="card"><a href="/article/gourmet-breakfasts-included-hotels-elevate-morning-meal"><div class="card-img-wrap"><img src="/assets/gourmet-breakfasts-included-hotels-elevate-morning-meal.webp" alt="" loading="lazy"></div></a><div class="card-text"><h3><a href="/article/gourmet-breakfasts-included-hotels-elevate-morning-meal">Gourmet Breakfasts Included: Hotels That Elevate Your Morning Meal to an Experience</a></h3><a href="/article/gourmet-breakfasts-included-hotels-elevate-morning-meal" class="card-link">Read <span>→</span></a></div></article>
+      <article class="card"><a href="/article/best-hotel-amenities-pillow-menus-personal-shopping"><div class="card-img-wrap"><img src="/assets/best-hotel-amenities-pillow-menus-personal-shopping.webp" alt="" loading="lazy"></div></a><div class="card-text"><h3><a href="/article/best-hotel-amenities-pillow-menus-personal-shopping">The Best Hotel Amenities You Never Knew Existed: From Pillow Menus to Personal Shopping</a></h3><a href="/article/best-hotel-amenities-pillow-menus-personal-shopping" class="card-link">Read <span>→</span></a></div></article>
+      <article class="card"><a href="/article/exclusive-club-lounge-access-free-drinks-snacks-business-centers"><div class="card-img-wrap"><img src="/assets/exclusive-club-lounge-access-free-drinks-snacks-business-centers.webp" alt="" loading="lazy"></div></a><div class="card-text"><h3><a href="/article/exclusive-club-lounge-access-free-drinks-snacks-business-centers">Exclusive Club Lounge Access: Unlocking Free Drinks, Snacks & Business Centers</a></h3><a href="/article/exclusive-club-lounge-access-free-drinks-snacks-business-centers" class="card-link">Read <span>→</span></a></div></article>
+      <article class="card"><a href="/article/hotels-private-onsen-hot-tubs-japanese-luxury"><div class="card-img-wrap"><img src="/assets/hotels-private-onsen-hot-tubs-japanese-luxury.webp" alt="" loading="lazy"></div></a><div class="card-text"><h3><a href="/article/hotels-private-onsen-hot-tubs-japanese-luxury">Hotels with Private Onsen/Hot Tubs: Your Personal Thermal Retreat for Japanese Luxury</a></h3><a href="/article/hotels-private-onsen-hot-tubs-japanese-luxury" class="card-link">Read <span>→</span></a></div></article>
+      <article class="card"><a href="/article/best-hotel-soundproofing-peaceful-billionaire-sleep"><div class="card-img-wrap"><img src="/assets/best-hotel-soundproofing-peaceful-billionaire-sleep.webp" alt="" loading="lazy"></div></a><div class="card-text"><h3><a href="/article/best-hotel-soundproofing-peaceful-billionaire-sleep">The Best Hotel Soundproofing: Ensuring a Peaceful, Billionaire-Level Sleep</a></h3><a href="/article/best-hotel-soundproofing-peaceful-billionaire-sleep" class="card-link">Read <span>→</span></a></div></article>
+      <article class="card"><a href="/article/hotels-free-luxury-car-use-drive-style-no-extra-cost"><div class="card-img-wrap"><img src="/assets/hotels-free-luxury-car-use-drive-style-no-extra-cost.webp" alt="" loading="lazy"></div></a><div class="card-text"><h3><a href="/article/hotels-free-luxury-car-use-drive-style-no-extra-cost">Hotels That Offer Free Luxury Car Use: Drive in Style for No Extra Cost</a></h3><a href="/article/hotels-free-luxury-car-use-drive-style-no-extra-cost" class="card-link">Read <span>→</span></a></div></article>
+      <article class="card"><a href="/article/beyond-mini-bar-hotels-gourmet-pantries-complimentary-snacks"><div class="card-img-wrap"><img src="/assets/beyond-mini-bar-hotels-gourmet-pantries-complimentary-snacks.webp" alt="" loading="lazy"></div></a><div class="card-text"><h3><a href="/article/beyond-mini-bar-hotels-gourmet-pantries-complimentary-snacks">Beyond the Mini-Bar: Hotels with Gourmet Pantries & Complimentary Snacks</a></h3><a href="/article/beyond-mini-bar-hotels-gourmet-pantries-complimentary-snacks" class="card-link">Read <span>→</span></a></div></article>
+      <article class="card"><a href="/article/power-group-bookings-unlocking-discounts-luxury-experiences"><div class="card-img-wrap"><img src="/assets/power-group-bookings-unlocking-discounts-luxury-experiences.webp" alt="" loading="lazy"></div></a><div class="card-text"><h3><a href="/article/power-group-bookings-unlocking-discounts-luxury-experiences">The Power of Group Bookings: Unlocking Discounts for Luxury Experiences</a></h3><a href="/article/power-group-bookings-unlocking-discounts-luxury-experiences" class="card-link">Read <span>→</span></a></div></article>
+      <article class="card"><a href="/article/maximizing-time-efficient-luxurious-itineraries-short-trips"><div class="card-img-wrap"><img src="/assets/maximizing-time-efficient-luxurious-itineraries-short-trips.webp" alt="" loading="lazy"></div></a><div class="card-text"><h3><a href="/article/maximizing-time-efficient-luxurious-itineraries-short-trips">Maximizing Your Time: How to Plan Efficient, Luxurious Itineraries for Short Trips</a></h3><a href="/article/maximizing-time-efficient-luxurious-itineraries-short-trips" class="card-link">Read <span>→</span></a></div></article>
     </div>
   </div>
 </section>
 
 <!-- Footer -->
 <footer class="site-footer">
-  <div class="container">
+  <div class="wrap">
     <div class="footer-grid">
       <div class="footer-brand">
-        <h3><span class="gold-dot">&#9670;</span> SIX STARS</h3>
-        <p>Unearthing unparalleled luxury travel experiences, without the exorbitant price tag. Expert insights on hidden gems, boutique stays, and five-star value worldwide.</p>
+        <h3>Six Stars Destinations</h3>
+        <p>An independent travel journal exploring extraordinary places and experiences — without the pretension. Honest stories from the road since 2024.</p>
       </div>
       <div class="footer-links">
         <h4>Explore</h4>
         <ul>
-          <li><a href="/">Home</a></li>
+          <li><a href="/">Journal</a></li>
           <li><a href="/about">About</a></li>
           <li><a href="/contact">Contact</a></li>
         </ul>
@@ -419,21 +421,18 @@ h1,h2,h3,h4{font-family:"Playfair Display",Georgia,serif;font-weight:700;color:v
       </div>
     </div>
     <div class="footer-bottom">
-      <div class="footer-links-row">
+      <div class="footer-inline">
         <a href="/privacy-policy">Privacy</a>
         <a href="/terms-of-service">Terms</a>
         <a href="/disclaimer">Disclaimer</a>
       </div>
       <p>&copy; 2026 Six Stars Destinations. All rights reserved.</p>
-      <p style="margin-top:8px;opacity:0.5">Disclaimer: The content on this site is for informational purposes only. We may earn a commission from affiliate links.</p>
+      <p style="margin-top:6px;opacity:0.6">We may earn a commission from affiliate links. All opinions are our own.</p>
     </div>
   </div>
 </footer>
 
-<!-- Ad: Global Anchor -->
-<div class="ad-slot">
-  <div id="ad-global-anchor"></div>
-</div>
+<div class="ad-slot"><div id="ad-global-anchor"></div></div>
 
 </body>
 </html>
