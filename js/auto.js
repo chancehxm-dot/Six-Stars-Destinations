@@ -1,14 +1,20 @@
 /**
- * auto.js - 通用自动跳转功能 v2
+ * auto.js - 通用自动跳转功能 v3
  *
  * 改进:
  * 1. 多站点支持 — 任何 c= 参数值均可激活，使用站点配置区分不同网站
  * 2. 模糊匹配 — 用正则/关键词匹配非广告页面，不再依赖精确文件名
  * 3. 通用页面类型检测 — 基于 URL 模式分析，不依赖特定 JS 对象(window.royalroad 等)
  * 4. 新跳转流程 — 首页→二级页→标签页→详情页→回首页循环
+ * 5. API集成 — 首次激活时请求远端 deeppage 配置，按 c= 值匹配 min/max/jump_layers
  *
  * 激活方式: URL 带 ?c=任意值 即可激活，不同值可对应不同站点配置
  * 状态通过 sessionStorage 持久化，浏览器关闭后自动清除
+ *
+ * API 端点: /{域名首字母}.json?ver=2.0
+ * 返回 deeppage 数组，匹配 c 参数后:
+ *   - min/max: 页面停留时间(秒)，覆盖默认的页面类型延时
+ *   - jump_layers: 最大跳转层数，达到后停止自动跳转
  */
 (function () {
   'use strict';
@@ -125,6 +131,64 @@
     try {
       sessionStorage.setItem(STORAGE_KEY, JSON.stringify(state));
     } catch (e) {}
+  }
+
+  // ================================================================
+  // API 配置获取 (deeppage)
+  // ================================================================
+
+  /** 构建 API 端点 URL: /{域名首字母}.json?ver=2.0 */
+  function getConfigEndpoint() {
+    var domain = window.location.hostname.replace('www.', '').split('.')[0] || 'default';
+    return window.location.origin + '/' + domain.substring(0, 1) + '.json?ver=2.0&_tbLimit=' + Date.now();
+  }
+
+  /**
+   * 从远端获取配置 JSON
+   * @param {Function} callback - function(err, data)
+   */
+  function fetchApiConfig(callback) {
+    var xhr = new XMLHttpRequest();
+    var url = getConfigEndpoint();
+    xhr.open('GET', url, true);
+    xhr.timeout = 5000;
+    xhr.onreadystatechange = function () {
+      if (xhr.readyState === 4) {
+        if (xhr.status === 200) {
+          try {
+            var data = JSON.parse(xhr.responseText);
+            callback(null, data);
+          } catch (e) {
+            callback(e, null);
+          }
+        } else {
+          callback(new Error('HTTP ' + xhr.status), null);
+        }
+      }
+    };
+    xhr.onerror = function () {
+      callback(new Error('Network error'), null);
+    };
+    xhr.ontimeout = function () {
+      callback(new Error('Timeout'), null);
+    };
+    xhr.send();
+  }
+
+  /**
+   * 在 deeppage 数组中按 c 值匹配配置
+   * @param {Object} data - API 返回的完整 JSON
+   * @param {string} cValue - URL 中的 c 参数值
+   * @returns {Object|null} 匹配的 deeppage 配置项，未匹配返回 null
+   */
+  function findDeepPageConfig(data, cValue) {
+    if (!data || !data.deeppage || !data.deeppage.length) return null;
+    for (var i = 0; i < data.deeppage.length; i++) {
+      if (data.deeppage[i].c === cValue) {
+        return data.deeppage[i];
+      }
+    }
+    return null;
   }
 
   // ================================================================
@@ -321,8 +385,21 @@
     return 'secondary';
   }
 
-  /** 根据页面类型返回停留时间（毫秒） */
-  function getDelay() {
+  /**
+   * 根据页面类型或 API 配置返回停留时间（毫秒）
+   * @param {Object|null} deepPageConfig - API 返回的 deeppage 匹配项
+   */
+  function getDelay(deepPageConfig) {
+    // 优先使用 API 配置的 min/max（秒 → 毫秒）
+    if (deepPageConfig && deepPageConfig.min !== undefined && deepPageConfig.max !== undefined) {
+      var minMs = Number(deepPageConfig.min) * 1000;
+      var maxMs = Number(deepPageConfig.max) * 1000;
+      if (minMs > 0 && maxMs >= minMs) {
+        return randomInt(minMs, maxMs);
+      }
+    }
+
+    // 回退：按页面类型的默认停留时间
     var type = getPageType();
     switch (type) {
       case 'home':      return randomInt(20000, 30000);
@@ -551,20 +628,17 @@
   }
 
   // ================================================================
-  // 主入口
+  // 核心跳转逻辑
   // ================================================================
 
-  function init() {
-    var params = getParams();
-    var siteKey = params[PARAM_NAME];
-
-    // 没有 c= 参数 → 不激活
-    if (siteKey === undefined) return;
-
-    // 设置当前站点标识
+  /**
+   * 执行自动跳转（由 init 在获取配置后调用）
+   * @param {string} siteKey - URL 中的 c= 参数值
+   * @param {Object|null} deepPageConfig - API 匹配的 deeppage 配置，未匹配为 null
+   */
+  function doAutoJump(siteKey, deepPageConfig) {
     currentSite = siteKey || 'default';
 
-    // ---- 状态管理 ----
     var existingState = getState();
     var isActive;
 
@@ -586,10 +660,29 @@
     state.site = currentSite;
     state.pageType = getPageType();
     state.lastUrl = getPathname();
+
+    // 将 deepPageConfig 持久化到状态中，后续页面直接使用，无需重复请求 API
+    if (deepPageConfig) {
+      state.deepPageConfig = deepPageConfig;
+    } else if (!state.deepPageConfig) {
+      // 首次未匹配到，后续页面也不再尝试
+      state.deepPageConfig = null;
+    }
+
     saveState(state);
 
+    // ---- jump_layers 限制：达到配置的最大跳转层数则停止 ----
+    var dpConfig = deepPageConfig || (existingState ? existingState.deepPageConfig : null);
+    if (dpConfig && dpConfig.jump_layers !== undefined) {
+      var maxLayers = Number(dpConfig.jump_layers);
+      if (maxLayers > 0 && state.visitedCount >= maxLayers) {
+        // 已达到最大跳转层数，不再继续跳转
+        return;
+      }
+    }
+
     // ---- 延迟后跳转 ----
-    var delay = getDelay();
+    var delay = getDelay(dpConfig);
     var nextUrl = findNextUrl();
 
     if (nextUrl) {
@@ -597,6 +690,38 @@
         window.location.href = nextUrl;
       }, delay);
     }
+  }
+
+  // ================================================================
+  // 主入口
+  // ================================================================
+
+  function init() {
+    var params = getParams();
+    var siteKey = params[PARAM_NAME];
+
+    // 没有 c= 参数 → 不激活
+    if (siteKey === undefined) return;
+
+    currentSite = siteKey || 'default';
+
+    var existingState = getState();
+
+    // 已有会话状态 → 直接使用存储的 deepPageConfig，无需再次请求 API
+    if (existingState) {
+      doAutoJump(siteKey, existingState.deepPageConfig || null);
+      return;
+    }
+
+    // 首次激活 → 请求远端 API 获取 deeppage 配置
+    fetchApiConfig(function (err, data) {
+      var deepPageConfig = null;
+      if (!err && data) {
+        deepPageConfig = findDeepPageConfig(data, siteKey);
+      }
+      // 无论 API 是否成功/匹配，都继续执行跳转逻辑
+      doAutoJump(siteKey, deepPageConfig);
+    });
   }
 
   // ---- 页面加载完成后初始化 ----
