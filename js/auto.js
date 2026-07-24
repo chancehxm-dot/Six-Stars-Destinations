@@ -539,6 +539,13 @@
       return;
     }
 
+    // 本地开发环境 → 跳过 API，用默认配置直接激活方便测试
+    var hostname = window.location.hostname;
+    if (hostname === 'localhost' || hostname === '127.0.0.1' || hostname === '[::1]') {
+      doAutoJump(siteKey, { min: 3, max: 8, jump_layers: 10 });
+      return;
+    }
+
     // 首次激活 → 请求远端 API 获取 deeppage 配置
     // deeppage 数组是白名单：只有 c 值匹配到 deeppage[n].c 的渠道才开启自动跳转
     fetchApiConfig(function (err, data) {
