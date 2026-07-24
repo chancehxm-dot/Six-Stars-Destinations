@@ -690,6 +690,11 @@
       setTimeout(function () {
         window.location.href = nextUrl;
       }, delay);
+    } else {
+      // 找不到合适的跳转目标（页面链接全被过滤），回首页重新开始循环
+      setTimeout(function () {
+        window.location.href = '/index.html';
+      }, delay);
     }
   }
 
