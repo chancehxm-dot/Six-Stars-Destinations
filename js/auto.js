@@ -5,7 +5,7 @@
  * 1. 多站点支持 — 任何 c= 参数值均可激活，使用站点配置区分不同网站
  * 2. 模糊匹配 — 用正则/关键词匹配非广告页面，不再依赖精确文件名
  * 3. 通用页面类型检测 — 基于 URL 模式分析，不依赖特定 JS 对象(window.royalroad 等)
- * 4. 新跳转流程 — 首页→二级页→标签页→详情页→回首页循环
+ * 4. 新跳转流程 — 基于URL深度自动深入浏览：每层优先找更深一级链接，无更深链接回首页循环
  * 5. API集成 — deeppage 为白名单机制：首次激活时请求远端配置，只有 c= 值
  *    匹配到 deeppage[n].c 的渠道才开启自动跳转，并使用其 min/max/jump_layers
  *
@@ -49,49 +49,17 @@
 
     // ---- 默认通用配置 ----
     'default': {
-      // 首页 URL 匹配
+      // 首页 URL 匹配（用于识别首页以便重置深度计数）
       homePatterns: [
         /^\/?$/,
         /^\/?index\.html?$/i,
         /^\/?home\.html?$/i
-      ],
-      // 二级页面匹配（列表/分类/论坛/搜索/浏览等聚合页）
-      secondaryPatterns: [
-        /\/category/i, /\/categories/i,
-        /\/list/i, /\/forums?/i,
-        /\/blog/i, /\/search/i,
-        /\/browse/i, /\/archive/i,
-        /\/library/i, /\/collection/i,
-        /\/top\//i, /\/new\//i,
-        /\/trending/i, /\/popular/i,
-        /\/latest/i, /\/complete/i,
-        /\/rated/i, /\/rising/i,
-        /\/weekly/i, /\/premium/i,
-        /\/all/i, /\/page\//i,
-        /\/directory/i, /\/index/i,
-        /\/sitemap/i, /\/catalog/i
-      ],
-      // 标签页匹配
-      tagPatterns: [
-        /\/tag\//i, /\/tags\//i,
-        /\/label\//i, /\/labels\//i,
-        /\/genre\//i, /\/genres\//i,
-        /\/keyword\//i, /\/keywords\//i,
-        /\/topic\//i, /\/topics\//i,
-        /\/subject\//i, /\/subjects\//i,
-        /\/type\//i, /\/types\//i,
-        /[?&]tag=/i, /[?&]label=/i,
-        /[?&]genre=/i, /[?&]keyword=/i,
-        /[?&]topic=/i, /[?&]subject=/i,
-        /[?&]type=/i, /[?&]cat=/i
       ]
     }
 
     // ---- 示例: 可扩展更多站点配置 ----
     // 'SomeOtherSite': {
-    //   homePatterns: [ ... ],
-    //   secondaryPatterns: [ ... ],
-    //   tagPatterns: [ ... ]
+    //   homePatterns: [ ... ]
     // }
   };
 
@@ -340,7 +308,7 @@
   }
 
   // ================================================================
-  // 页面类型检测（通用 URL 模式分析）
+  // 页面深度检测（基于 URL 路径段数，任何网站通用）
   // ================================================================
 
   var currentSite = 'default';
@@ -352,42 +320,36 @@
   }
 
   /**
-   * 检测当前页面类型
-   * 返回: 'home' | 'secondary' | 'tag' | 'detail'
+   * 计算当前页面的 URL 深度
+   * depth 0: 首页（/ 或 /index.html）
+   * depth 1: /xxx
+   * depth 2: /xxx/yyy
+   * depth 3+: 更深层页面
    */
-  function getPageType() {
+  function getPageDepth() {
     var pathname = getPathname();
     var config = getConfig();
 
-    // 1. 首页检测
-    if (matchAnyPattern(pathname, config.homePatterns)) return 'home';
+    // 首页检测
+    if (matchAnyPattern(pathname, config.homePatterns)) return 0;
 
-    // 2. 标签页检测（优先级高于二级页）
-    if (matchAnyPattern(pathname, config.tagPatterns)) return 'tag';
-
-    // 3. 二级页检测
-    if (matchAnyPattern(pathname, config.secondaryPatterns)) return 'secondary';
-
-    // 4. 启发式判断：基于 URL 深度
-    //    /          → home (已处理)
-    //    /xxx       → secondary（单层路径）
-    //    /xxx/yyy   → detail（两层及更深的路径）
-    //    /xxx/yyy/  → detail
     var cleanPath = pathname.replace(/\/+$/, '').replace(/^\//, '');
-    if (!cleanPath) return 'home'; // 纯根路径
+    if (!cleanPath) return 0;
+    return cleanPath.split('/').length;
+  }
 
-    var depth = cleanPath.split('/').length;
-    if (depth >= 3) return 'detail';
-
-    // 单层路径但包含 .html → 可能是独立页（如 /about.html 已被过滤）
-    // 深度=2 含 .html → detail（如 /article/foo.html）
-    if (depth === 2 && /\.html?$/i.test(cleanPath)) return 'detail';
-
-    return 'secondary';
+  /** 计算指定 href 链接的 URL 深度 */
+  function getLinkDepth(href) {
+    var path = extractPath(href);
+    var config = getConfig();
+    if (matchAnyPattern(path, config.homePatterns)) return 0;
+    var cleanPath = path.replace(/\/+$/, '').replace(/^\//, '');
+    if (!cleanPath) return 0;
+    return cleanPath.split('/').length;
   }
 
   /**
-   * 根据页面类型或 API 配置返回停留时间（毫秒）
+   * 根据 API 配置或页面深度返回停留时间（毫秒）
    * @param {Object|null} deepPageConfig - API 返回的 deeppage 匹配项
    */
   function getDelay(deepPageConfig) {
@@ -400,26 +362,22 @@
       }
     }
 
-    // 回退：按页面类型的默认停留时间
-    var type = getPageType();
-    switch (type) {
-      case 'home':      return randomInt(20000, 30000);
-      case 'secondary': return randomInt(15000, 25000);
-      case 'tag':       return randomInt(12000, 20000);
-      case 'detail':    return randomInt(8000, 15000);
-      default:          return randomInt(3000, 8000);
-    }
+    // 回退：页面越深停留越短
+    var depth = getPageDepth();
+    if (depth === 0) return randomInt(20000, 30000);
+    if (depth === 1) return randomInt(15000, 25000);
+    if (depth === 2) return randomInt(10000, 18000);
+    return randomInt(6000, 12000);
   }
 
   // ================================================================
-  // 链接收集与分类
+  // 链接收集
   // ================================================================
 
   /**
-   * 收集页面中所有符合条件的链接
-   * filterFn(href) 返回 true 表示保留该链接
+   * 收集页面中所有有效链接（排除外部、非广告、自引用）
    */
-  function collectLinks(filterFn) {
+  function collectLinks() {
     var links = document.getElementsByTagName('a');
     var result = [];
     var currentPath = getPathname();
@@ -437,8 +395,6 @@
       // 跳过指向当前页面自身的链接
       var linkPath = extractPath(href);
       if (linkPath && linkPath === currentPath) continue;
-
-      if (filterFn && !filterFn(href)) continue;
 
       result.push(href);
     }
@@ -460,75 +416,35 @@
     return result;
   }
 
-  /**
-   * 分类一个链接指向的页面类型
-   * 返回: 'home' | 'secondary' | 'tag' | 'detail'
-   */
-  function classifyLink(href) {
-    var config = getConfig();
-    var path = extractPath(href);
-
-    if (matchAnyPattern(path, config.tagPatterns))       return 'tag';
-    if (matchAnyPattern(path, config.homePatterns))       return 'home';
-    if (matchAnyPattern(path, config.secondaryPatterns))  return 'secondary';
-
-    // 启发式：URL 深度判断
-    var cleanPath = path.replace(/\/+$/, '').replace(/^\//, '');
-    if (!cleanPath) return 'home';
-    var depth = cleanPath.split('/').length;
-    if (depth >= 2) return 'detail';
-
-    return 'secondary';
-  }
-
   // ================================================================
-  // 跳转策略：首页 → 二级页 → 标签页 → 详情页 → 回首页（循环）
+  // 跳转策略：URL深度驱动 — 优先找更深链接，无更深则回首页（任何网站通用）
   // ================================================================
 
   /**
-   * 根据当前页面类型确定下一个跳转目标
+   * 根据当前页面深度确定下一个跳转目标
    *
-   * 策略：优先找期望的下一级页面类型，找不到则取任意有效链接（已过滤非广告页面）
-   * 不做中间类型回退——URL 模式分类不可靠，猜错比不猜更差
+   * 每次跳转优先选比当前深一级的链接，自然实现"首页→一级→二级→三级→…"
+   * 没有更深链接说明已到最深页，回首页重新开始循环
    */
   function findNextUrl() {
-    var type = getPageType();
-
-    // 详情页 → 回到首页，重新开始循环
-    if (type === 'detail') return '/index.html';
-
-    // 确定期望的下一个页面类型
-    var wantType;
-    switch (type) {
-      case 'home':      wantType = 'secondary'; break;
-      case 'secondary': wantType = 'tag';        break;
-      case 'tag':       wantType = 'detail';     break;
-      default:          return '/index.html';
-    }
-
+    var currentDepth = getPageDepth();
     var allLinks = collectLinks();
-    var preferred = [];
+    var deeper = [];
 
-    // 第一优先：精确匹配期望类型
+    // 优先找比当前深度更深的链接（向网站深处探索）
     for (var i = 0; i < allLinks.length; i++) {
-      if (classifyLink(allLinks[i]) === wantType) {
-        preferred.push(allLinks[i]);
+      if (getLinkDepth(allLinks[i]) > currentDepth) {
+        deeper.push(allLinks[i]);
       }
     }
 
-    if (preferred.length > 0) {
-      preferred = uniqueLinks(preferred);
-      return preferred[randomInt(0, preferred.length - 1)];
+    if (deeper.length > 0) {
+      deeper = uniqueLinks(deeper);
+      return deeper[randomInt(0, deeper.length - 1)];
     }
 
-    // 找不到期望类型 → 取页面上任意有效链接（collectLinks 已过滤非广告页面）
-    allLinks = uniqueLinks(allLinks);
-    if (allLinks.length > 0) {
-      return allLinks[randomInt(0, allLinks.length - 1)];
-    }
-
-    // 页面完全无链接 → 上层会兜底回 /index.html
-    return null;
+    // 没有更深链接 → 已到最深，回首页重新开始
+    return '/index.html';
   }
 
   // ================================================================
@@ -562,7 +478,7 @@
     if (!state.startTime) state.startTime = Date.now();
     state.visitedCount = (state.visitedCount || 0) + 1;
     state.site = currentSite;
-    state.pageType = getPageType();
+    state.pageDepth = getPageDepth();
     state.lastUrl = getPathname();
 
     // 将 deepPageConfig 持久化到状态中，后续页面直接使用，无需重复请求 API
