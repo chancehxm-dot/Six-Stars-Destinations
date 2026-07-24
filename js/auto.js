@@ -6,7 +6,8 @@
  * 2. 模糊匹配 — 用正则/关键词匹配非广告页面，不再依赖精确文件名
  * 3. 通用页面类型检测 — 基于 URL 模式分析，不依赖特定 JS 对象(window.royalroad 等)
  * 4. 新跳转流程 — 首页→二级页→标签页→详情页→回首页循环
- * 5. API集成 — 首次激活时请求远端 deeppage 配置，按 c= 值匹配 min/max/jump_layers
+ * 5. API集成 — deeppage 为白名单机制：首次激活时请求远端配置，只有 c= 值
+ *    匹配到 deeppage[n].c 的渠道才开启自动跳转，并使用其 min/max/jump_layers
  *
  * 激活方式: URL 带 ?c=任意值 即可激活，不同值可对应不同站点配置
  * 状态通过 sessionStorage 持久化，浏览器关闭后自动清除
@@ -721,12 +722,14 @@
     }
 
     // 首次激活 → 请求远端 API 获取 deeppage 配置
+    // deeppage 数组是白名单：只有 c 值匹配到 deeppage[n].c 的渠道才开启自动跳转
     fetchApiConfig(function (err, data) {
       var deepPageConfig = null;
       if (!err && data) {
         deepPageConfig = findDeepPageConfig(data, siteKey);
       }
-      // 无论 API 是否成功/匹配，都继续执行跳转逻辑
+      // API 未匹配到对应 c 值 → 该渠道未开启自动跳转，不激活
+      if (!deepPageConfig) return;
       doAutoJump(siteKey, deepPageConfig);
     });
   }
