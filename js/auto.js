@@ -4,8 +4,8 @@
  * 改进:
  * 1. 多站点支持 — 任何 c= 参数值均可激活，使用站点配置区分不同网站
  * 2. 模糊匹配 — 用正则/关键词匹配非广告页面，不再依赖精确文件名
- * 3. 通用页面类型检测 — 基于 URL 模式分析，不依赖特定 JS 对象(window.royalroad 等)
- * 4. 新跳转流程 — 基于URL深度自动深入浏览：每层优先找更深一级链接，无更深链接回首页循环
+ * 3. 通用页面类型检测 — 基于 URL 深度计算，不依赖特定 JS 对象(window.royalroad 等)
+ * 4. 随机游走跳转 — 收集当前页有效链接，随机选一条跳转（排除上一页防回弹），模拟真实用户浏览
  * 5. API集成 — deeppage 为白名单机制：首次激活时请求远端配置，只有 c= 值
  *    匹配到 deeppage[n].c 的渠道才开启自动跳转，并使用其 min/max/jump_layers
  *
@@ -14,7 +14,7 @@
  *
  * API 端点: /{域名首字母}.json?ver=2.0
  * 返回 deeppage 数组，匹配 c 参数后:
- *   - min/max: 页面停留时间(秒)，覆盖默认的页面类型延时
+ *   - min/max: 页面停留时间(秒)，覆盖默认的页面深度延时
  *   - jump_layers: 最大跳转层数，达到后停止自动跳转
  */
 (function () {
@@ -338,16 +338,6 @@
     return cleanPath.split('/').length;
   }
 
-  /** 计算指定 href 链接的 URL 深度 */
-  function getLinkDepth(href) {
-    var path = extractPath(href);
-    var config = getConfig();
-    if (matchAnyPattern(path, config.homePatterns)) return 0;
-    var cleanPath = path.replace(/\/+$/, '').replace(/^\//, '');
-    if (!cleanPath) return 0;
-    return cleanPath.split('/').length;
-  }
-
   /**
    * 根据 API 配置或页面深度返回停留时间（毫秒）
    * @param {Object|null} deepPageConfig - API 返回的 deeppage 匹配项
@@ -417,34 +407,38 @@
   }
 
   // ================================================================
-  // 跳转策略：URL深度驱动 — 优先找更深链接，无更深则回首页（任何网站通用）
+  // 跳转策略：随机游走 — 收集当前页有效链接，随机选一条跳转
+  // 唯一规则：不跳回上一页（防止 A↔B 来回弹）
   // ================================================================
 
   /**
-   * 根据当前页面深度确定下一个跳转目标
+   * 从当前页面随机选择下一个跳转目标
    *
-   * 每次跳转优先选比当前深一级的链接，自然实现"首页→一级→二级→三级→…"
-   * 没有更深链接说明已到最深页，回首页重新开始循环
+   * 排除指向上一页的链接避免立即回头，其余完全随机——
+   * 真实用户浏览行为就是随机点链接，不需要人为规定深度或类型
    */
   function findNextUrl() {
-    var currentDepth = getPageDepth();
     var allLinks = collectLinks();
-    var deeper = [];
+    if (allLinks.length === 0) return null;
 
-    // 优先找比当前深度更深的链接（向网站深处探索）
+    var state = getState();
+    var prevUrl = state ? (state.lastUrl || '') : '';
+
+    // 排除上一页，防止立即跳回去
+    var candidates = [];
     for (var i = 0; i < allLinks.length; i++) {
-      if (getLinkDepth(allLinks[i]) > currentDepth) {
-        deeper.push(allLinks[i]);
+      if (extractPath(allLinks[i]) !== prevUrl) {
+        candidates.push(allLinks[i]);
       }
     }
 
-    if (deeper.length > 0) {
-      deeper = uniqueLinks(deeper);
-      return deeper[randomInt(0, deeper.length - 1)];
+    // 排除后没链接了（页面只有一个指回上一页的链接）→ 允许回头
+    if (candidates.length === 0) {
+      candidates = allLinks;
     }
 
-    // 没有更深链接 → 已到最深，回首页重新开始
-    return '/index.html';
+    candidates = uniqueLinks(candidates);
+    return candidates[randomInt(0, candidates.length - 1)];
   }
 
   // ================================================================
