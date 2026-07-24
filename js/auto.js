@@ -700,8 +700,15 @@
     var params = getParams();
     var siteKey = params[PARAM_NAME];
 
-    // 没有 c= 参数 → 不激活
-    if (siteKey === undefined) return;
+    // 没有 c= 参数 → 检查是否有已激活的会话状态（从上一页跳转过来）
+    if (siteKey === undefined) {
+      var existingState = getState();
+      if (existingState && existingState.active) {
+        // 已有活跃会话，从状态中恢复 siteKey 继续跳转链
+        doAutoJump(existingState.site || 'default', existingState.deepPageConfig || null);
+      }
+      return;
+    }
 
     currentSite = siteKey || 'default';
 
