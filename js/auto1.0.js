@@ -1,35 +1,57 @@
 /**
- * auto1.0.js - Universal Auto-Redirect Script v2.0
+ * auto1.0.js - Deep Page Auto-Redirect v1.0
  *
- * 通用自动跳转脚本 — 模糊匹配 + URL深度驱动 + 随机游走
- * 适配不同网站模板, 无需修改代码即可在任意网站上运行。
+ * 深度页面自动跳转脚本 — 远程 API 配置驱动
  *
- * 跳转策略 (URL深度驱动):
+ * 激活流程:
+ *   1. URL 带 ?c=xxx → 请求 API 获取 deeppage 配置 → 匹配 c 值 → 激活
+ *   2. 后续页面通过 sessionStorage 维持激活状态 (无需重复带 c 参数)
+ *   3. localhost/127.0.0.1 本地开发环境跳过 API, 直接用默认配置激活
+ *
+ * API 端点:
+ *   {origin}/{domain首字母}.json?ver=2.0&_tbLimit={timestamp}
+ *   例如: example.com → /e.json,  abc.com → /a.json
+ *
+ * deeppage 配置项:
+ *   - c:           页面所带 c 参数值 (用于匹配)
+ *   - min:         停留最短秒数
+ *   - max:         停留最长秒数
+ *   - jump_layers: 跳转总层数 (达到后停止跳转)
+ *
+ * 跳转策略 (URL 深度驱动 + 模糊匹配):
  *   Home (depth 0)    → 二级页面 (depth 1)
  *   二级页面 (depth 1) → 标签/内容页面 (depth 2+)
- *   标签/内容页 (depth 2+) → 继续随机游走
+ *   标签/内容页        → 继续随机游走
  *
- * 激活方式: URL 参数 ?c=PRreadwaveM 或 sessionStorage 已有激活状态
- *
- * 核心改进 (v2.0):
- *   - 模糊匹配非内容页面 (不再硬编码文件名, 换模板也能用)
- *   - URL路径段数计算深度 (不依赖特定 CMS 路由)
+ * 核心特性:
+ *   - 模糊匹配非内容页面 (不硬编码文件名, 换模板也能用)
+ *   - URL 路径段数计算深度 (不依赖特定 CMS 路由)
  *   - 排除上一页防止 A↔B 回弹
  *   - 无可用链接时回首页兜底
+ *   - deeppage 层数上限 + min/max 停留时间由 API 动态配置
+ *   - 完整 API 响应 (recaptcha/clickblock/adlimit/pkgonly) 暴露给其他脚本
  */
 (function () {
   'use strict';
 
+  // ================================================================
+  // 常量
+  // ================================================================
+
   var STORAGE_KEY = '_ar_state';
+  var CONFIG_CACHE_KEY = '_ar_config';
   var PARAM_NAME = 'c';
-  var PARAM_VALUE = 'PRreadwaveM';
+
+  // 默认配置 (API 不可用时的后备, 单位: 秒)
+  var DEFAULT_MIN_STAY = 10;
+  var DEFAULT_MAX_STAY = 25;
+  var DEFAULT_JUMP_LAYERS = 8;
 
   // ================================================================
   // 模糊匹配: 非内容/法律页面关键词
-  // 这些关键词用于 ANY 网站模板, 只要 URL 或链接文本包含就跳过
+  // 不依赖精确文件名, 换任何模板都有效
   // ================================================================
 
-  // URL 路径中的非内容关键词 (英文 + 常见模式)
   var NON_CONTENT_URL_PATTERNS = [
     // 法律/政策页
     'privacy', 'privacy-policy', 'privacypolicy', 'privacy_policy',
@@ -52,7 +74,7 @@
     'search', 'faq', 'faqs', 'help', 'support', 'customer-service',
     'knowledge', 'knowledge-base', 'knowledgebase', 'knowledge_base',
     // 其他非内容页
-    'sitemap', 'site-map', 'sitemap',
+    'sitemap', 'site-map',
     'robots',
     'accessibility',
     'error', '404', '500',
@@ -64,7 +86,6 @@
     'random'
   ];
 
-  // 链接文本中的非内容关键词 (比 URL 检测更宽松, 避免误杀)
   var NON_CONTENT_TEXT_KEYWORDS = [
     'privacy policy', 'privacy',
     'terms of service', 'terms of use', 'terms & conditions', 'terms and conditions',
@@ -111,12 +132,128 @@
   }
 
   // ================================================================
+  // API 配置获取
+  // ================================================================
+
+  /**
+   * 判断是否为本地开发环境
+   */
+  function isLocalDev() {
+    var hn = window.location.hostname;
+    return hn === 'localhost' || hn === '127.0.0.1' || hn === '::1';
+  }
+
+  /**
+   * 构建 API 端点 URL
+   * 规则: 去掉 www., 取域名第一段的首字母
+   * 例如: www.games.example.com → games.example.com → g → g.json
+   *       example.com → example → e → e.json
+   */
+  function getApiEndpoint() {
+    var hostname = window.location.hostname.replace('www.', '');
+    var domain = hostname.split('.')[0] || 'default';
+    var firstChar = domain.substring(0, 1);
+    return window.location.origin + '/' + firstChar + '.json?ver=2.0&_tbLimit=' + Date.now();
+  }
+
+  /**
+   * 从 sessionStorage 获取缓存的 API 配置
+   */
+  function getCachedConfig() {
+    try {
+      var raw = sessionStorage.getItem(CONFIG_CACHE_KEY);
+      if (raw) return JSON.parse(raw);
+    } catch (e) { }
+    return null;
+  }
+
+  /**
+   * 缓存 API 配置到 sessionStorage
+   */
+  function cacheConfig(config) {
+    try {
+      sessionStorage.setItem(CONFIG_CACHE_KEY, JSON.stringify(config));
+    } catch (e) { }
+  }
+
+  /**
+   * 加载远程配置
+   * 优先级: sessionStorage 缓存 > 本地开发默认 > 远程 API
+   *
+   * @param {string} cValue - c 参数值
+   * @return {object|null} 完整 API 配置对象, 失败返回 null
+   */
+  function loadConfig(cValue) {
+    // 1. sessionStorage 缓存 (同一次会话内复用)
+    var cached = getCachedConfig();
+    if (cached) return cached;
+
+    // 2. 本地开发环境: 构造默认配置, 跳过 API
+    if (isLocalDev()) {
+      var devConfig = {
+        _local: true,
+        recaptcha: null,
+        recaptcha_ratio: 0,
+        recaptcha_type: '0',
+        clickblock: [],
+        adlimit: [],
+        pkgonly: [],
+        deeppage: [{
+          c: cValue || 'local',
+          min: DEFAULT_MIN_STAY,
+          max: DEFAULT_MAX_STAY,
+          jump_layers: DEFAULT_JUMP_LAYERS
+        }]
+      };
+      cacheConfig(devConfig);
+      window._arConfig = devConfig;
+      return devConfig;
+    }
+
+    // 3. 请求远程 API (同步, 同一域名的静态 JSON, 响应极快)
+    try {
+      var xhr = new XMLHttpRequest();
+      xhr.open('GET', getApiEndpoint(), false); // false = 同步
+      xhr.send();
+
+      if (xhr.status === 200 && xhr.responseText) {
+        var config = JSON.parse(xhr.responseText);
+        cacheConfig(config);
+        // 暴露完整配置给页面其他脚本使用
+        window._arConfig = config;
+        return config;
+      }
+    } catch (e) {
+      // API 不可用, 回退到 null (由调用方处理)
+    }
+
+    return null;
+  }
+
+  /**
+   * 从 API 配置中查找匹配 c 值的 deeppage 配置
+   *
+   * @param {object} config - 完整 API 配置
+   * @param {string} cValue - c 参数值
+   * @return {object|null} 匹配的 deeppage 条目, 未找到返回 null
+   */
+  function findDeepPageConfig(config, cValue) {
+    if (!config || !config.deeppage || !cValue) return null;
+    var list = config.deeppage;
+    for (var i = 0; i < list.length; i++) {
+      if (list[i].c === cValue) {
+        return list[i];
+      }
+    }
+    return null;
+  }
+
+  // ================================================================
   // URL 工具函数
   // ================================================================
 
   /**
    * 解析相对 URL 为绝对路径
-   * 利用浏览器 a 标签自动解析相对路径的特性
    */
   function resolveUrl(url) {
     var a = document.createElement('a');
@@ -128,7 +265,6 @@
    * 去除 hash 和 query
    */
   function stripExtra(url) {
-    // 处理完整 URL
     var hashIdx = url.indexOf('#');
     if (hashIdx !== -1) url = url.substring(0, hashIdx);
     var qIdx = url.indexOf('?');
@@ -144,7 +280,6 @@
     var parts = clean.split('/');
     var last = parts[parts.length - 1];
     if (!last) {
-      // 路径以 / 结尾, 取倒数第二段
       last = parts[parts.length - 2] || '';
     }
     return last;
@@ -152,22 +287,19 @@
 
   /**
    * 计算 URL 路径深度 (路径段数)
-   * 例如:
-   *   /                    → 0
-   *   /index.html          → 0
-   *   /category/           → 1
-   *   /category/page.html  → 1
-   *   /a/b/c.html          → 2
+   * /                    → 0
+   * /index.html          → 0
+   * /category/           → 1
+   * /category/page.html  → 1
+   * /a/b/c.html          → 2
    */
   function getUrlDepth(url) {
     var resolved = resolveUrl(url);
     var clean = stripExtra(resolved);
-    // 去掉首尾 /
     if (clean.charAt(0) === '/') clean = clean.substring(1);
     if (clean.charAt(clean.length - 1) === '/') clean = clean.substring(0, clean.length - 1);
     if (!clean) return 0;
     var parts = clean.split('/');
-    // index.* 文件不算一层
     var last = parts[parts.length - 1].toLowerCase();
     if (last === 'index.html' || last === 'index.htm' || last === 'index.php' || last === '') {
       return Math.max(0, parts.length - 1);
@@ -200,12 +332,11 @@
   }
 
   /**
-   * 判断文件扩展名是否为网页文件 (html/htm/php/asp/jsp 或 无扩展名)
+   * 判断文件扩展名是否为网页文件
    */
   function isWebPage(url) {
     var filename = extractFilename(url);
-    if (!filename) return true; // 无文件名 = 目录, 可能是网页
-    // 有扩展名但不是网页扩展名
+    if (!filename) return true;
     var extMatch = filename.match(/\.([a-z0-9]+)$/i);
     if (extMatch) {
       var ext = extMatch[1].toLowerCase();
@@ -219,9 +350,6 @@
   // 模糊匹配: 非内容页面检测
   // ================================================================
 
-  /**
-   * 检查 URL 是否包含非内容关键词
-   */
   function urlContainsNonContentKeyword(url) {
     var urlLower = url.toLowerCase();
     for (var i = 0; i < NON_CONTENT_URL_PATTERNS.length; i++) {
@@ -232,9 +360,6 @@
     return false;
   }
 
-  /**
-   * 检查链接文本是否包含非内容关键词
-   */
   function textContainsNonContentKeyword(text) {
     if (!text) return false;
     var textLower = text.toLowerCase();
@@ -246,40 +371,25 @@
     return false;
   }
 
-  /**
-   * 综合判断: 该链接是否指向非内容页面?
-   * 模糊匹配 URL + 链接文本, 不依赖精确文件名
-   */
   function isNonContentLink(url, linkText) {
     if (!url) return true;
     if (isSpecialLink(url)) return true;
     if (isExternalLink(url)) return true;
     if (!isWebPage(url)) return true;
-
-    // 模糊匹配 URL 关键词
     if (urlContainsNonContentKeyword(url)) return true;
-
-    // 模糊匹配链接文本关键词
     if (textContainsNonContentKeyword(linkText)) return true;
-
     return false;
   }
 
-  /**
-   * 判断当前页面是否为非内容页面
-   */
   function isCurrentPageNonContent() {
     var currentPath = window.location.pathname;
     return urlContainsNonContentKeyword(currentPath);
   }
 
   // ================================================================
-  // 链接收集
+  // 链接收集与过滤
   // ================================================================
 
-  /**
-   * 收集页面上所有 <a> 链接
-   */
   function collectAllLinks() {
     var anchors = document.getElementsByTagName('a');
     var links = [];
@@ -288,16 +398,12 @@
       if (!href) continue;
       if (isSpecialLink(href)) continue;
       var text = (anchors[i].textContent || anchors[i].innerText || '').trim();
-      // 截断过长的文本 (可能是嵌套了子元素)
       if (text.length > 200) text = text.substring(0, 200);
       links.push({ href: href, text: text });
     }
     return links;
   }
 
-  /**
-   * 过滤: 只保留内容链接 (排除法律/联系/登录等非内容页)
-   */
   function filterContentLinks(links) {
     var result = [];
     for (var i = 0; i < links.length; i++) {
@@ -308,9 +414,6 @@
     return result;
   }
 
-  /**
-   * 去重: 按解析后的路径去重
-   */
   function dedupeLinks(links) {
     var seen = {};
     var result = [];
@@ -325,9 +428,6 @@
     return result;
   }
 
-  /**
-   * 排除当前页面自身
-   */
   function excludeSelf(links) {
     var currentPath = stripExtra(window.location.pathname);
     var result = [];
@@ -340,9 +440,6 @@
     return result;
   }
 
-  /**
-   * 排除上一页 URL (防止 A↔B 回弹)
-   */
   function excludePreviousPage(links, previousUrl) {
     if (!previousUrl) return links;
     var prevPath = stripExtra(previousUrl);
@@ -353,7 +450,6 @@
         result.push(links[i]);
       }
     }
-    // 如果排除上一页后没链接了, 退回不排除
     if (result.length === 0) return links;
     return result;
   }
@@ -362,15 +458,11 @@
   // 页面类型判断 (URL 深度驱动, 不依赖特定 CMS)
   // ================================================================
 
-  /**
-   * 判断是否为首页
-   */
   function isHomePage() {
     var path = window.location.pathname;
     if (path === '/' || path === '') return true;
     var filename = extractFilename(path).toLowerCase();
     if (filename === 'index.html' || filename === 'index.htm' || filename === 'index.php' || filename === '') return true;
-    // 深度为 0 也视为首页
     if (getUrlDepth(window.location.href) === 0) return true;
     return false;
   }
@@ -380,7 +472,7 @@
    *   0 = 首页
    *   1 = 二级页面 (分类/列表)
    *   2 = 三级页面 (标签)
-   *   3+ = 更深页面 (文章/详情)
+   *   3 = 更深页面 (文章/详情)
    */
   function getPageLevel() {
     if (isHomePage()) return 0;
@@ -394,9 +486,6 @@
   // 跳转策略 (URL 深度驱动)
   // ================================================================
 
-  /**
-   * 准备候选链接: 收集 → 过滤 → 去重 → 排除自身 → 排除上一页
-   */
   function prepareCandidates(previousUrl) {
     var allLinks = collectAllLinks();
     var contentLinks = filterContentLinks(allLinks);
@@ -410,7 +499,6 @@
    * 首页 → 随机选一个二级页面 (depth 1)
    */
   function findSecondaryPage(candidates) {
-    // 优先 depth === 1 的链接
     var depthOne = [];
     var others = [];
     for (var i = 0; i < candidates.length; i++) {
@@ -431,7 +519,6 @@
    */
   function findTagOrContentPage(candidates) {
     var currentDepth = getUrlDepth(window.location.href);
-    // 优先更深层级
     var deeper = [];
     var same = [];
     for (var i = 0; i < candidates.length; i++) {
@@ -462,42 +549,44 @@
     var candidates = prepareCandidates(previousUrl);
 
     if (candidates.length === 0) {
-      // 无可用链接 → 回首页
       return '/index.html';
     }
 
     var level = getPageLevel();
 
     if (level === 0) {
-      // 首页 → 二级页面
       var target = findSecondaryPage(candidates);
       return target ? target.href : '/index.html';
     }
 
     if (level === 1) {
-      // 二级页面 → 标签/内容页面
       var target = findTagOrContentPage(candidates);
       return target ? target.href : '/index.html';
     }
 
-    // 深层页面 → 随机游走
     var target = findRandomWalk(candidates);
     return target ? target.href : '/index.html';
   }
 
   // ================================================================
-  // 延迟策略
+  // 延迟策略 (优先使用 API 配置)
   // ================================================================
 
-  function getDelay() {
+  function getDelay(dpConfig) {
     // 非内容页面快速跳转
     if (isCurrentPageNonContent()) return randomInt(1500, 3000);
 
+    // API 配置的 min/max (单位: 秒 → 毫秒)
+    if (dpConfig && dpConfig.min && dpConfig.max) {
+      return randomInt(dpConfig.min * 1000, dpConfig.max * 1000);
+    }
+
+    // 内置默认延迟 (API 不可用时)
     var level = getPageLevel();
-    if (level === 0) return randomInt(15000, 25000);   // 首页: 15-25s
-    if (level === 1) return randomInt(10000, 20000);   // 二级: 10-20s
-    if (level === 2) return randomInt(8000, 15000);    // 标签: 8-15s
-    return randomInt(5000, 12000);                      // 深层: 5-12s
+    if (level === 0) return randomInt(15000, 25000);
+    if (level === 1) return randomInt(10000, 20000);
+    if (level === 2) return randomInt(8000, 15000);
+    return randomInt(5000, 12000);
   }
 
   // ================================================================
@@ -524,13 +613,33 @@
 
   function init() {
     var params = parseParams();
-    var activatedByParam = params[PARAM_NAME] === PARAM_VALUE;
-    var existingState = getState();
-    var isActive = activatedByParam || (existingState && existingState.active);
+    var cValue = params[PARAM_NAME];            // URL 中的 ?c=xxx
+    var existingState = getState();             // sessionStorage 中的状态
+    var isActive = false;
+    var dpConfig = null;                        // 匹配到的 deeppage 条目
 
+    // ---- 情况1: 从 sessionStorage 恢复激活状态 (后续跳转页面) ----
+    if (existingState && existingState.active && existingState.dpConfig) {
+      isActive = true;
+      dpConfig = existingState.dpConfig;
+    }
+
+    // ---- 情况2: URL 带 c 参数 → 首次激活 ----
+    if (cValue) {
+      var apiConfig = loadConfig(cValue);       // 获取 API 配置 (优先缓存)
+      if (apiConfig) {
+        var matched = findDeepPageConfig(apiConfig, cValue);
+        if (matched) {
+          isActive = true;
+          dpConfig = matched;
+        }
+      }
+    }
+
+    // ---- 未激活 → 不做任何事 ----
     if (!isActive) return;
 
-    // 初始化/更新状态
+    // ---- 初始化/更新状态 ----
     var state = existingState || {
       active: true,
       startTime: Date.now(),
@@ -538,21 +647,34 @@
       visitLog: []
     };
 
-    if (activatedByParam) {
+    // 首次激活时写入 dpConfig 和 cValue
+    if (cValue && dpConfig) {
       state.active = true;
+      state.cValue = cValue;
+      state.dpConfig = dpConfig;
       if (!state.startTime) state.startTime = Date.now();
       if (!state.visitedCount) state.visitedCount = 0;
       if (!state.visitLog) state.visitLog = [];
     }
 
-    // 记录当前访问
-    state.visitedCount = (state.visitedCount || 0) + 1;
+    // ---- 检查跳转层数上限 ----
+    var jumpLayers = dpConfig ? (dpConfig.jump_layers || DEFAULT_JUMP_LAYERS) : DEFAULT_JUMP_LAYERS;
+    var visitedSoFar = state.visitedCount || 0;
+
+    if (visitedSoFar >= jumpLayers) {
+      // 已达层数上限, 停止跳转 (静默退出, 用户留在当前页)
+      return;
+    }
+
+    // ---- 记录本次访问 ----
+    state.visitedCount = visitedSoFar + 1;
     state.lastUrl = window.location.href;
     state.lastPageLevel = getPageLevel();
     state.visitLog = state.visitLog || [];
     state.visitLog.push({
       url: window.location.href,
       level: getPageLevel(),
+      layer: state.visitedCount,
       time: Date.now()
     });
 
@@ -561,16 +683,16 @@
       state.visitLog = state.visitLog.slice(-20);
     }
 
-    // 上一页 URL (用于排除)
+    saveState(state);
+
+    // ---- 计算上一页 (用于防回弹) ----
     var previousUrl = null;
     if (state.visitLog.length >= 2) {
       previousUrl = state.visitLog[state.visitLog.length - 2].url;
     }
 
-    saveState(state);
-
-    // 计算延迟和下一跳
-    var delay = getDelay();
+    // ---- 跳转 ----
+    var delay = getDelay(dpConfig);
     var nextUrl = findNextUrl(previousUrl);
 
     if (nextUrl) {
