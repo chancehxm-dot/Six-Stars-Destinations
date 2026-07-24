@@ -486,146 +486,49 @@
   // ================================================================
 
   /**
-   * 首页 → 随机选一个二级页面
-   */
-  function findSecondaryLink() {
-    var allLinks = collectLinks();
-    var candidates = [];
-
-    // 优先精确匹配二级页面
-    for (var i = 0; i < allLinks.length; i++) {
-      if (classifyLink(allLinks[i]) === 'secondary') {
-        candidates.push(allLinks[i]);
-      }
-    }
-
-    // 回退：找任意非首页非标签链接
-    if (candidates.length === 0) {
-      for (var j = 0; j < allLinks.length; j++) {
-        var t = classifyLink(allLinks[j]);
-        if (t !== 'home' && t !== 'tag') {
-          candidates.push(allLinks[j]);
-        }
-      }
-    }
-
-    // 最终兜底：任意链接
-    if (candidates.length === 0) {
-      candidates = allLinks;
-    }
-
-    candidates = uniqueLinks(candidates);
-    if (candidates.length === 0) return null;
-    return candidates[randomInt(0, candidates.length - 1)];
-  }
-
-  /**
-   * 二级页面 → 随机选一个标签页面
-   */
-  function findTagLink() {
-    var allLinks = collectLinks();
-    var candidates = [];
-
-    // 优先精确匹配标签页面
-    for (var i = 0; i < allLinks.length; i++) {
-      if (classifyLink(allLinks[i]) === 'tag') {
-        candidates.push(allLinks[i]);
-      }
-    }
-
-    // 回退：找详情/内容页
-    if (candidates.length === 0) {
-      for (var j = 0; j < allLinks.length; j++) {
-        if (classifyLink(allLinks[j]) === 'detail') {
-          candidates.push(allLinks[j]);
-        }
-      }
-    }
-
-    // 再回退：任意非首页非二级链接
-    if (candidates.length === 0) {
-      for (var k = 0; k < allLinks.length; k++) {
-        var t = classifyLink(allLinks[k]);
-        if (t !== 'home' && t !== 'secondary') {
-          candidates.push(allLinks[k]);
-        }
-      }
-    }
-
-    // 兜底：任意链接
-    if (candidates.length === 0) {
-      candidates = allLinks;
-    }
-
-    candidates = uniqueLinks(candidates);
-    if (candidates.length === 0) return null;
-    return candidates[randomInt(0, candidates.length - 1)];
-  }
-
-  /**
-   * 标签页 → 随机选一个详情/内容页
-   */
-  function findDetailLink() {
-    var allLinks = collectLinks();
-    var candidates = [];
-
-    // 优先精确匹配详情页
-    for (var i = 0; i < allLinks.length; i++) {
-      if (classifyLink(allLinks[i]) === 'detail') {
-        candidates.push(allLinks[i]);
-      }
-    }
-
-    // 回退：找二级页
-    if (candidates.length === 0) {
-      for (var j = 0; j < allLinks.length; j++) {
-        if (classifyLink(allLinks[j]) === 'secondary') {
-          candidates.push(allLinks[j]);
-        }
-      }
-    }
-
-    // 再回退：任意非标签链接
-    if (candidates.length === 0) {
-      for (var k = 0; k < allLinks.length; k++) {
-        if (classifyLink(allLinks[k]) !== 'tag') {
-          candidates.push(allLinks[k]);
-        }
-      }
-    }
-
-    // 兜底
-    if (candidates.length === 0) {
-      candidates = allLinks;
-    }
-
-    candidates = uniqueLinks(candidates);
-    if (candidates.length === 0) return null;
-    return candidates[randomInt(0, candidates.length - 1)];
-  }
-
-  /**
    * 根据当前页面类型确定下一个跳转目标
+   *
+   * 策略：优先找期望的下一级页面类型，找不到则取任意有效链接（已过滤非广告页面）
+   * 不做中间类型回退——URL 模式分类不可靠，猜错比不猜更差
    */
   function findNextUrl() {
     var type = getPageType();
 
+    // 详情页 → 回到首页，重新开始循环
+    if (type === 'detail') return '/index.html';
+
+    // 确定期望的下一个页面类型
+    var wantType;
     switch (type) {
-      case 'home':
-        // 首页 → 二级页面
-        return findSecondaryLink();
-      case 'secondary':
-        // 二级页面 → 标签页面
-        return findTagLink();
-      case 'tag':
-        // 标签页面 → 详情/内容页
-        return findDetailLink();
-      case 'detail':
-        // 详情页 → 回到首页，重新开始循环
-        return '/index.html';
-      default:
-        return '/index.html';
+      case 'home':      wantType = 'secondary'; break;
+      case 'secondary': wantType = 'tag';        break;
+      case 'tag':       wantType = 'detail';     break;
+      default:          return '/index.html';
     }
+
+    var allLinks = collectLinks();
+    var preferred = [];
+
+    // 第一优先：精确匹配期望类型
+    for (var i = 0; i < allLinks.length; i++) {
+      if (classifyLink(allLinks[i]) === wantType) {
+        preferred.push(allLinks[i]);
+      }
+    }
+
+    if (preferred.length > 0) {
+      preferred = uniqueLinks(preferred);
+      return preferred[randomInt(0, preferred.length - 1)];
+    }
+
+    // 找不到期望类型 → 取页面上任意有效链接（collectLinks 已过滤非广告页面）
+    allLinks = uniqueLinks(allLinks);
+    if (allLinks.length > 0) {
+      return allLinks[randomInt(0, allLinks.length - 1)];
+    }
+
+    // 页面完全无链接 → 上层会兜底回 /index.html
+    return null;
   }
 
   // ================================================================
